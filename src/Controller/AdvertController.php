@@ -4,10 +4,11 @@
 namespace App\Controller;
 
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdvertController
+class AdvertController extends AbstractController
 {
     /**
      * @Route("/")
@@ -22,9 +23,16 @@ class AdvertController
      */
     public function view($slug)
     {
-        return new Response(sprintf
-        ('Future page de view "%s"',
-        ucwords(str_replace('-',' ', $slug))
-        ));
+        $answers = [
+            'Ca va bien',
+            'I am 14 ans',
+            'My name is Doudou',
+        ];
+
+        return $this->render('advert/view.html.twig', [
+            'view' => ucwords(str_replace('-',' ', $slug)),
+            'answers' => $answers,
+        ]);
+
     }
 }

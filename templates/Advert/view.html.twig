@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View: {{ view }} {% endblock %}
+
+{% block body %}
+<h1>{{ view }}</h1>
+
+{# commentaires #}
+
+<div>
+    Eventually, we'll print the full question here !
+</div>
+
+<h2>Answers ({{ answers|length }})</h2>
+
+<ul>
+    {% for answer in answers %}
+    <li>
+        {{ answer }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
