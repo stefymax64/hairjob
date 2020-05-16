@@ -1,3 +1,11 @@
 #index:
-#    path: /
+#    path: /advert
 #    controller: App\Controller\AdvertController::index
+
+#view:
+#    path: /advert/view{id}
+#    controller: App\Controller\AdvertController::view
+
+#add:
+#    path: /advert/add
+#    controller: App\Controller\AdvertController::add
