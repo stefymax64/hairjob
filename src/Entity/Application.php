@@ -34,7 +34,7 @@ class Application
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Advert")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Advert", inversedBy="applications")
      * @ORM\JoinColumn(nullable=false)
      */
     private $advert;
@@ -85,12 +85,12 @@ class Application
         return $this;
     }
 
-    public function getAdvert(): ?Advert
+    public function getAdvert()
     {
         return $this->advert;
     }
 
-    public function setAdvert(?Advert $advert): self
+    public function setAdvert(Advert $advert)
     {
         $this->advert = $advert;
 

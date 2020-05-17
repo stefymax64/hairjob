@@ -58,10 +58,16 @@ class Advert
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="advert")
+     */
+    private $applications;
+
     public function __construct()
     {
         $this->date = new \Datetime();
         $this->categories = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function getId()
@@ -159,6 +165,34 @@ class Advert
     {
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
+        }
+
+        return $this;
+    }
+
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application)
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setAdvert($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application)
+    {
+        if ($this->applications->contains($application)) {
+            $this->applications->removeElement($application);
+            // set the owning side to null (unless already changed)
+            if ($application->getAdvert() === $this) {
+                $application->setAdvert(null);
+            }
         }
 
         return $this;

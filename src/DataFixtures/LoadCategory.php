@@ -1,14 +1,12 @@
 <?php
 
-
 namespace App\DataFixtures;
 
-
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use App\Entity\Category;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
 
-class LoadCategory implements FixtureInterface
+class LoadCategory extends Fixture
 {
     public function load(ObjectManager $manager)
     {

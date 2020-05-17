@@ -6,6 +6,9 @@ namespace App\Controller;
 use App\Entity\Advert;
 use App\Entity\Image;
 use App\Entity\Application;
+use App\Entity\AdvertSkill;
+use App\Entity\Category;
+use App\Entity\Skill;
 use App\Service\SpamGenerator;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,7 +68,15 @@ class AdvertController extends AbstractController
             ->getRepository(Application::class)
             ->findBy(array('advert'=>$advert));
 
-        return $this->render('Advert/view.html.twig', ['advert' => $advert, 'listApplications' => $listApplications]);
+        $listAdvertSkills = $em
+            ->getRepository(AdvertSkill::class)
+            ->findBy(array('advert' => $advert));
+
+        return $this->render('Advert/view.html.twig', [
+            'advert' => $advert,
+            'listApplications' => $listApplications,
+            'listAdvertSkills' => $listAdvertSkills
+            ]);
     }
 
     /**
@@ -73,6 +84,8 @@ class AdvertController extends AbstractController
      */
     public function add(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $advert = new Advert();
         $advert->setTitle( 'Recherche collaborateur (H/F)');
         $advert->setAuthor('La tête à l\'envers');
@@ -94,6 +107,17 @@ class AdvertController extends AbstractController
 
         $application1->setAdvert($advert);
         $application2->setAdvert($advert);
+
+        $listSkills = $em->getRepository(Skill::class)->findAll();
+        foreach ($listSkills as $skill)
+        {
+            $advertSkill = new AdvertSkill();
+            $advertSkill->setAdvert($advert);
+            $advertSkill->setSkill($skill);
+            $advertSkill->setLevel('Qualifié');
+
+            $em->persist($advertSkill);
+        }
 
         $em = $this->getDoctrine()->getManager();
 
