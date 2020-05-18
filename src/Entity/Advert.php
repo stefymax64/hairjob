@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="advert")
  * @ORM\Entity(repositoryClass=AdvertRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Advert
 {
@@ -63,11 +64,39 @@ class Advert
      */
     private $applications;
 
+    /**
+     * @ORM\Column(name="updated_at",type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(name="nb_applications", type="integer")
+     */
+    private $nbApplications = 0;
+
     public function __construct()
     {
         $this->date = new \Datetime();
         $this->categories = new ArrayCollection();
         $this->applications = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \DateTime());
+    }
+
+    public function increaseApplication()
+    {
+        $this->nbApplications++;
+    }
+
+    public function decreaseApplication()
+    {
+        $this->nbApplications--;
     }
 
     public function getId()
@@ -194,6 +223,30 @@ class Advert
                 $application->setAdvert(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getNbApplications()
+    {
+        return $this->nbApplications;
+    }
+
+    public function setNbApplications(int $nbApplications)
+    {
+        $this->nbApplications = $nbApplications;
 
         return $this;
     }

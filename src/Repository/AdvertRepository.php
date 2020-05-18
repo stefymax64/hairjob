@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Advert;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,42 @@ class AdvertRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Advert::class);
+    }
+
+    public function myFindAll()
+    {
+        //Methode 1 : passe par l'EntityManager
+        $queryBuilder = $this->_em->createQueryBuilder()
+            ->select('a')
+            ->from($this->_entityName, 'a');
+
+        //Méthode 2 : Passe par le raccourci, ce qui est recommandé !
+        $queryBuilder = $this->createQueryBuilder('a');
+
+        $query = $queryBuilder->getQuery();
+        $results = $query->getResult();
+
+        return $results;
+    }
+    public function getAdvertWithCategories(array $categoryNames)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb
+            ->innerJoin('a.categories', 'c')
+            ->addSelect('c');
+        $qb->where($qb->expr()->in('c.name', $categoryNames));
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function whereCurrentYear(QueryBuilder $qb)
+    {
+        $qb
+            ->andWhere('a.date BETWEEN :start AND :end')
+            ->setParameter('start', new \DateTime(date('Y').'-01-01'))
+            ->setParameter('end', new \DateTime(date('Y').'-12-31'));
     }
 
     // /**

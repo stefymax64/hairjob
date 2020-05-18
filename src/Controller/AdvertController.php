@@ -119,8 +119,6 @@ class AdvertController extends AbstractController
             $em->persist($advertSkill);
         }
 
-        $em = $this->getDoctrine()->getManager();
-
         $em->persist($advert);
         $em->persist($application1);
         $em->persist($application2);
