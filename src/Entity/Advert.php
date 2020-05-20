@@ -6,6 +6,7 @@ use App\Repository\AdvertRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Advert
@@ -39,7 +40,7 @@ class Advert
     private $author;
 
     /**
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="content", type="string", length=255)
      */
     private $content;
 
@@ -73,6 +74,12 @@ class Advert
      * @ORM\Column(name="nb_applications", type="integer")
      */
     private $nbApplications = 0;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -247,6 +254,18 @@ class Advert
     public function setNbApplications(int $nbApplications)
     {
         $this->nbApplications = $nbApplications;
+
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
 
         return $this;
     }
