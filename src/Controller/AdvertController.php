@@ -12,6 +12,12 @@ use App\Entity\Skill;
 use App\Service\SpamGenerator;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -81,14 +87,34 @@ class AdvertController extends AbstractController
      */
     public function add(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $advert = new Advert();
+        $advert->setDate(new \DateTime());
+        $form = $this->get('form.factory')->createBuilder(FormType::class, $advert)
+            ->add('date', DateType::class)
+            ->add('title', TextType::class)
+            ->add('content', TextareaType::class)
+            ->add('author', TextType::class)
+            ->add('published', CheckboxType::class, array('required' =>false))
+            ->add('save', SubmitType::class)
+            ->getForm();
 
         if ($request->isMethod('POST'))
         {
+            $form->handleRequest($request);
+
+        }
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($advert);
+            $em->flush();
+
             $request->getSession()->getFlashBag()->add('notice', 'L\'annonce est enregistrée.');
             return $this->redirectToRoute('advert_view', ['id' => $advert->getId()]);
         }
-        return $this->render('Advert/add.html.twig');
+
+        return $this->render('Advert/add.html.twig', array('form' => $form->createView()));
     }
 
     /**
@@ -96,9 +122,12 @@ class AdvertController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $advert = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Advert')
+            ->find($id);
 
-        $advert = $em->getRepository('App:Advert')->find($id);
+        $form = $this->get('form.factory')->createBuilder(FormType::class, $advert);
 
         if (null === $advert)
         {
@@ -154,5 +183,13 @@ class AdvertController extends AbstractController
     {
         $message = $spamGenerator->getSpamMessage();
         $this->addFlash('success', $message);
+    }
+
+    public function cleanUp($days, Request $request)
+    {
+        $cleaner = $this->get('service.advert');
+        $cleaner->getSession()->getFlashBag()->add('info', 'Les annonces plus anciennes que '.$days.' jours ont étés nettoyées.');
+
+        return $this->redirectToRoute('advert_index');
     }
 }

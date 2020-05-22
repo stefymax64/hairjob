@@ -36,6 +36,21 @@ class AdvertRepository extends ServiceEntityRepository
 
         return $results;
     }
+
+    public function myFind()
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb
+            ->where('a.author = :author')
+            ->setParameter('author', 'Tête à l\'envers');
+        $this->whereCurrentYear($qb);
+        $qb->orderBy('a.date', 'DESC');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getAdvertWithCategories(array $categoryNames)
     {
         $qb = $this->createQueryBuilder('a');
@@ -74,6 +89,16 @@ class AdvertRepository extends ServiceEntityRepository
         return new Paginator($query, true);
     }
 
+    public function getAdvertsBefore(\DateTime $date)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.updatedAt <= :date')
+            ->orWhere('a.updatedAt IS NULL AND a.date <= :date')
+            ->andWhere('a.applications IS EMPTY')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
+    }
 
     // /**
     //  * @return Advert[] Returns an array of Advert objects
