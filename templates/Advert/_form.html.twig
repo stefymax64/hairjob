@@ -1,11 +1,79 @@
-{# Cette vue n'hérite de personne, elle sera incluse par d'autres vues qui,
-   elles, hériteront probablement du layout. Je dis « probablement » car,
-   ici pour cette vue, on n'en sait rien et c'est une info qui ne nous concerne pas. #}
-
 <h3>Formulaire d'annonce</h3>
 
-{# On laisse vide la vue pour l'instant, on la comblera plus tard
-   lorsqu'on saura afficher un formulaire. #}
 <div class="">
-    {{ form(form) }}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_errors(form) }}
+
+    {% if form.date is defined %}
+        {{ form_row(form.date) }}
+    {% endif %}
+
+    <div class="form-group">
+        {{ form_label(form.title, "Titre de l'annonce", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.title) }}
+
+        <div class="col-sm-10">
+            {{ form_widget(form.title, {'attr': {'class':'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.content, "Contenu de l'annonce", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.content) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    {{ form_row(form.author) }}
+    {{ form_row(form.published) }}
+    {{ form_row(form.image) }}
+
+    <div class="">
+        {{ form_row(form.categories) }}
+        <a href="#" id="add_category" class="btn btn-default">Ajouter une catégorie</a>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let $container = $('div#advert_categories');
+            let index = $container.find(':input').length;
+            $('#add_category').click(function (e) {
+                addCategory($container);
+                e.preventDefault();
+                return false;
+            });
+            if (index == 0) {
+                addCategory($container);
+            }else {
+                $container.children('div').each(function () {
+                    addDeleteLink($(this));
+                });
+            }
+
+        function addCategory($container) {
+            let template = $container.attr('data-prototype')
+                .replace(/__name__label__/g, 'Catégorie n°' + (index+1))
+                    .replace(/__name__/g, index);
+            let $prototype = $(template);
+            addDeleteLink($prototype);
+            $container.append($prototype);
+            index++;
+        }
+
+        function addDeleteLink($prototype) {
+            let $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+            $prototype.append($deleteLink);
+            $deleteLink.click(function (e) {
+                $prototype.remove();
+                e.preventDefault();
+                return false;
+            });
+        }
+        });
+    </script>
+
+    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+    {{ form_rest(form) }}
+
+    {{ form_end(form) }}
 </div>

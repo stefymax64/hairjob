@@ -9,6 +9,8 @@ use App\Entity\Application;
 use App\Entity\AdvertSkill;
 use App\Entity\Category;
 use App\Entity\Skill;
+use App\Form\AdvertEditType;
+use App\Form\AdvertType;
 use App\Service\SpamGenerator;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -88,23 +90,9 @@ class AdvertController extends AbstractController
     public function add(Request $request)
     {
         $advert = new Advert();
-        $advert->setDate(new \DateTime());
-        $form = $this->get('form.factory')->createBuilder(FormType::class, $advert)
-            ->add('date', DateType::class)
-            ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
-            ->add('author', TextType::class)
-            ->add('published', CheckboxType::class, array('required' =>false))
-            ->add('save', SubmitType::class)
-            ->getForm();
+        $form = $this->createForm(AdvertType::class, $advert);
 
-        if ($request->isMethod('POST'))
-        {
-            $form->handleRequest($request);
-
-        }
-
-        if ($form->isSubmitted() && $form->isValid())
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->persist($advert);
@@ -122,25 +110,24 @@ class AdvertController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        $advert = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('App:Advert')
-            ->find($id);
-
-        $form = $this->get('form.factory')->createBuilder(FormType::class, $advert);
+        $em = $this->getDoctrine()->getManager();
+        $advert = $em->getRepository('App:Advert')->find($id);
 
         if (null === $advert)
         {
             throw new NotFoundHttpException("L'annonce".$id."n'existe pas");
         }
+        
+        $form = $this->get('form.factory')->createBuilder(AdvertEditType::class, $advert);
 
-        if ($request->isMethod('POST'))
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid())
         {
-            $request->getFlashBag()->add('notice', 'L\'annonce a été modifié.');
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('notice', 'L\'annonce a été modifié.');
             return $this->redirectToRoute('advert_view', ['id' => $advert->getId()]);
         }
 
-        return $this->render('Advert/edit.html.twig', ['advert' => $advert]);
+        return $this->render('Advert/edit.html.twig', ['advert' => $advert, 'form' => $form->createView()]);
     }
 
     /**
