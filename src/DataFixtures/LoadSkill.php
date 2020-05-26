@@ -2,15 +2,15 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Skill;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\Skill;
 
 class LoadSkill extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $names=array(
+        $names = [
             'Diagnostic capillaire',
             'Techniques de coupes de cheveux',
             'Techniques de séchage',
@@ -26,10 +26,9 @@ class LoadSkill extends Fixture
             'Gestion administrative',
             'Gestion comptable',
             'Outils bureautiques'
-        );
+        ];
 
-        foreach ($names as $name)
-        {
+        foreach ($names as $name) {
             $skill = new Skill();
             $skill->setName($name);
             $manager->persist($skill);

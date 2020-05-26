@@ -61,53 +61,53 @@ class Application
         $this->getAdvert()->decreaseApplication();
     }
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAuthor()
+    public function getAuthor(): ?string
     {
         return $this->author;
     }
 
-    public function setAuthor(string $author)
+    public function setAuthor(string $author): self
     {
         $this->author = $author;
 
         return $this;
     }
 
-    public function getDate()
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date)
+    public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
 
         return $this;
     }
 
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function setContent(string $content)
+    public function setContent(string $content): self
     {
         $this->content = $content;
 
         return $this;
     }
 
-    public function getAdvert()
+    public function getAdvert(): ?Advert
     {
         return $this->advert;
     }
 
-    public function setAdvert(Advert $advert)
+    public function setAdvert(?Advert $advert): self
     {
         $this->advert = $advert;
 

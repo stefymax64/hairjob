@@ -6,8 +6,8 @@ use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
  * @ORM\Table(name="Category")
+ * @ORM\Entity(repositoryClass=CategoryRepository::class)
  */
 class Category
 {
@@ -23,17 +23,17 @@ class Category
      */
     private $name;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 

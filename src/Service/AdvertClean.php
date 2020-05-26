@@ -20,13 +20,11 @@ class AdvertClean
         $advertRepository = $this->em->getRepository('App:Advert');
         $avertSkillRepository = $this->em->getRepository('App:AdvertSkill');
 
-        $date = new \DateTime($days.' days ago');
+        $date = new \DateTime($days . ' days ago');
         $listAdverts = $advertRepository->getAdvertsBefore($date);
-        foreach ($listAdverts as $advert)
-        {
+        foreach ($listAdverts as $advert) {
             $advertSkills = $advertSkillRepository->finBy(array('advert' => '$advert'));
-            foreach ($advertSkills as $advertSkill)
-            {
+            foreach ($advertSkills as $advertSkill) {
                 $this->em->remove($advertSkill);
             }
             $this->em->remove($advert);

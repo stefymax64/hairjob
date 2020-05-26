@@ -6,7 +6,6 @@ namespace App\Controller\Core;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class CoreController extends AbstractController
 {
@@ -14,6 +13,7 @@ class CoreController extends AbstractController
     {
         return $this->render('Core\index.html.twig');
     }
+
     /**
      * @Route("/index", name="core_index")
      */

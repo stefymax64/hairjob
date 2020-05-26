@@ -10,7 +10,7 @@ class LoadCategory extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $names = array(
+        $names = [
             'Manager',
             'Gérant/e',
             'Coiffeur/se',
@@ -24,10 +24,9 @@ class LoadCategory extends Fixture
             'Stagiaire',
             'Formateur/trice',
             'Professeur de coiffure'
-        );
+        ];
 
-        foreach ($names as $name)
-        {
+        foreach ($names as $name) {
             $category = new Category();
             $category->setName($name);
 

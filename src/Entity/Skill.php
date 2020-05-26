@@ -6,8 +6,8 @@ use App\Repository\SkillRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=SkillRepository::class)
  * @ORM\Table(name="skill")
+ * @ORM\Entity(repositoryClass=SkillRepository::class)
  */
 class Skill
 {
@@ -23,17 +23,17 @@ class Skill
      */
     private $name;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 

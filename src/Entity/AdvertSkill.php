@@ -6,8 +6,8 @@ use App\Repository\AdvertSkillRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=AdvertSkillRepository::class)
  * @ORM\Table(name="advert_skill")
+ * @ORM\Entity(repositoryClass=AdvertSkillRepository::class)
  */
 class AdvertSkill
 {
@@ -35,41 +35,41 @@ class AdvertSkill
      */
     private $skill;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLevel()
+    public function getLevel(): ?string
     {
         return $this->level;
     }
 
-    public function setLevel(string $level)
+    public function setLevel(string $level): self
     {
         $this->level = $level;
 
         return $this;
     }
 
-    public function getAdvert()
+    public function getAdvert(): ?Advert
     {
         return $this->advert;
     }
 
-    public function setAdvert(Advert $advert)
+    public function setAdvert(?Advert $advert): self
     {
         $this->advert = $advert;
 
         return $this;
     }
 
-    public function getSkill()
+    public function getSkill(): ?Skill
     {
         return $this->skill;
     }
 
-    public function setSkill(Skill $skill)
+    public function setSkill(?Skill $skill): self
     {
         $this->skill = $skill;
 

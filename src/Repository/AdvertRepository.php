@@ -21,6 +21,34 @@ class AdvertRepository extends ServiceEntityRepository
         parent::__construct($registry, Advert::class);
     }
 
+    public function getAdvertsBefore(\DateTime $date)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.updatedAt <= :date')
+            ->orWhere('a.updatedAt IS NULL AND a.date <= :date')
+            ->andWhere('a.applications IS EMPTY')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAdverts($page, $nbPerPage)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->leftJoin('a.image', 'i')
+            ->addSelect('i')
+            ->leftJoin('a.categories', 'c')
+            ->addSelect('c')
+            ->orderBy('a.date', 'DESC')
+            ->getQuery();
+
+        $query
+            ->setFirstResult(($page - 1) * $nbPerPage)
+            ->setMaxResults($nbPerPage);
+
+        return new Paginator($query, true);
+    }
+
     public function myFindAll()
     {
         //Methode 1 : passe par l'EntityManager
@@ -68,64 +96,7 @@ class AdvertRepository extends ServiceEntityRepository
     {
         $qb
             ->andWhere('a.date BETWEEN :start AND :end')
-            ->setParameter('start', new \DateTime(date('Y').'-01-01'))
-            ->setParameter('end', new \DateTime(date('Y').'-12-31'));
+            ->setParameter('start', new \DateTime(date('Y') . '-01-01'))
+            ->setParameter('end', new \DateTime(date('Y') . '-12-31'));
     }
-
-    public function getAdverts($page, $nbPerPage)
-    {
-        $query = $this->createQueryBuilder('a')
-            ->leftJoin('a.image', 'i')
-            ->addSelect('i')
-            ->leftJoin('a.categories', 'c')
-            ->addSelect('c')
-            ->orderBy('a.date', 'DESC')
-            ->getQuery();
-
-        $query
-            ->setFirstResult(($page-1) * $nbPerPage)
-            ->setMaxResults($nbPerPage);
-
-        return new Paginator($query, true);
-    }
-
-    public function getAdvertsBefore(\DateTime $date)
-    {
-        return $this->createQueryBuilder('a')
-            ->where('a.updatedAt <= :date')
-            ->orWhere('a.updatedAt IS NULL AND a.date <= :date')
-            ->andWhere('a.applications IS EMPTY')
-            ->setParameter('date', $date)
-            ->getQuery()
-            ->getResult();
-    }
-
-    // /**
-    //  * @return Advert[] Returns an array of Advert objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Advert
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

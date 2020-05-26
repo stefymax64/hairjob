@@ -4,8 +4,8 @@
 namespace App\EventListener;
 
 
-use App\Service\ApplicationMailer;
 use App\Entity\Application;
+use App\Service\ApplicationMailer;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
 class ApplicationCreationListener
@@ -23,8 +23,7 @@ class ApplicationCreationListener
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
-        if (!$entity instanceof Application)
-        {
+        if (!$entity instanceof Application) {
             return;
         }
         $this->applicationMailer->sendNewNotification($entity);

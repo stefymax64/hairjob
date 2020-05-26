@@ -19,7 +19,7 @@ class AdvertType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $pattern = 'D%';
+        $pattern = 'C%';
 
         $builder
             ->add('date', DateTimeType::class)
@@ -27,38 +27,35 @@ class AdvertType extends AbstractType
             ->add('author', TextType::class)
             ->add('content', TextareaType::class)
             ->add('image', ImageType::class)
-            ->add('categories', EntityType::class, array(
+            ->add('categories', EntityType::class, [
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'name',
                 'multiple' => true,
-                'query_builder' => function(CategoryRepository $repository) use ($pattern)
-                {
+                'query_builder' => function (CategoryRepository $repository) use ($pattern) {
                     return $repository->getLikeQueryBuilder($pattern);
-                }
-                ))
+                }])
             ->add('save', SubmitType::class);
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event)
-        {
-            $advert = $event->getData();
-            if (null === $advert)
-            {
-                return;
-            }
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) {
+                $advert = $event->getData();
+                if (null === $advert) {
+                    return;
+                }
 
-            if (!$advert->getPublished() || null === $advert->getId())
-            {
-                $event->getForm()->add('published', CheckboxType::class, array('required' => false));
-            }else {
-                $event->getForm()->remove('published');
-            }
-        });
+                if (!$advert->getPublished() || null === $advert->getId()) {
+                    $event->getForm()->add('published', CheckboxType::class, [
+                        'required' => false]);
+                } else {
+                    $event->getForm()->remove('published');
+                }
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'App\Entity\Advert'
-        ]);
+            'data_class' => 'App\Entity\Advert']);
     }
 }
