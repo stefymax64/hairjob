@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\Advert;
 
 use App\Entity\Advert;
 use App\Entity\AdvertSkill;
@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdvertController extends AbstractController
 {
     /**
-     * @Route("/{page}", name="advert_index", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/advert/{page}", name="advert_index", requirements={"page" = "\d+"}, defaults={"page" = 1})
      */
     public function index($page)
     {
@@ -45,7 +45,7 @@ class AdvertController extends AbstractController
     }
 
     /**
-     * @Route("/view/{id}", name="advert_view", requirements={"id" = "\d+"})
+     * @Route("/advert/view/{id}", name="advert_view", requirements={"id" = "\d+"})
      */
     public function view($id)
     {
@@ -73,7 +73,7 @@ class AdvertController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="advert_add")
+     * @Route("/advert/add", name="advert_add")
      */
     public function add(Request $request)
     {
@@ -95,7 +95,7 @@ class AdvertController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="advert_edit", requirements={"id" = "\d+"})
+     * @Route("/advert/edit/{id}", name="advert_edit", requirements={"id" = "\d+"})
      */
     public function edit(Request $request, $id)
     {
@@ -121,7 +121,7 @@ class AdvertController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="advert_delete", requirements={"id" = "\d+"})
+     * @Route("/advert/delete/{id}", name="advert_delete", requirements={"id" = "\d+"})
      */
     public function delete(Request $request, $id)
     {

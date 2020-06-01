@@ -9,13 +9,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CoreController extends AbstractController
 {
+    /**
+     * @Route("/", name="index")
+     */
     public function index()
     {
-        return $this->render('Core\index.html.twig');
+        return $this->render('Core\index.html.twig', [
+            'title' => 'Présentation du site',
+            'subtitle' => 'Bienvenue'
+    ]);
     }
 
     /**
-     * @Route("/index", name="core_index")
+     * @Route("/contact", name="core_contact")
      */
     public function contact(Request $request)
     {

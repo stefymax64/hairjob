@@ -26,12 +26,13 @@
         <div id="menu" class="">
             <h3>Les annonces</h3>
             <ul class="">
-                <li><a href="{{ path('advert_index') }}">Accueil</a></li>
+                <li><a href="{{ path('index') }}">Accueil</a></li>
+                <li><a href="{{ path('advert_index') }}">Liste des annonces</a></li>
                 <li><a href="{{ path('advert_add') }}">Publier une annonce</a></li>
             </ul>
 
             <h4>Dernières annonces</h4>
-            {{ render(controller("App\\Controller\\AdvertController::menu", {'limit': 2})) }}
+            {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 2})) }}
         </div>
         <div id="content" class="">
             {% block base_body %}

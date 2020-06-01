@@ -88,12 +88,12 @@ class Image
 
     public function getUploadDir()
     {
-        return 'uploads/img';
+        return 'images/uploads';
     }
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../public/'.$this->getUploadDir();
     }
 
     public function getWebPath()
@@ -135,7 +135,7 @@ class Image
         return $this->file;
     }
 
-    public function setFile(?UploadedFile $file = null): self
+    public function setFile(UploadedFile $file)
     {
         $this->file = $file;
         if (null !== $this->url) {

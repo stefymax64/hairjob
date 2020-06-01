@@ -51,7 +51,6 @@
             e.preventDefault();
             return false;
         });
-
         if (index == 0) {
             addCategory($container);
         } else {
@@ -59,7 +58,6 @@
                 addDeleteLink($(this));
             });
         }
-
         function addCategory($container) {
             let template = $container.attr('data-prototype')
                 .replace(/__name__label__/g, 'Catégorie n°' + (index + 1))
@@ -69,7 +67,6 @@
             $container.append($prototype);
             index++;
         }
-
         function addDeleteLink($prototype) {
             let $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
             $prototype.append($deleteLink);

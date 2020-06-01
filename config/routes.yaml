@@ -1,11 +1,36 @@
 #index:
-#    path: /advert
-#    controller: App\Controller\AdvertController::index
+#    path: /
+#    defaults:
+#        controller: App\Controller\Core\CoreController::index
+
+#contact:
+#    path: /contact
+#    defaults:
+#        controller: App\Controller\Core\CoreController::contact
+
+
+#index:
+#    path: /{page}
+#    controller: App\Controller\Advert\AdvertController::index
 
 #view:
 #    path: /advert/view{id}
-#    controller: App\Controller\AdvertController::view
+#    controller: App\Controller\Advert\AdvertController::view
 
 #add:
 #    path: /advert/add
-#    controller: App\Controller\AdvertController::add
+#    controller: App\Controller\Advert\AdvertController::add
+
+#edit:
+#   path: /advert/edit/{id}
+#   defaults:
+#       controller: App\Controller\Advert\AdvertController::edit
+#   requirements:
+#       id: \d+
+
+#delete:
+#   path: /advert/delete/{id}
+#   defaults:
+#       controller: App\Controller\Advert\AdvertController::App\Controller\Advert\AdvertController::delete
+#   requirements:
+#       id: \d+
