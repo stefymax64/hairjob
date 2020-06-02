@@ -10,7 +10,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
               integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
-        {#<link rel="stylesheet" href="/css/app.css">#}
+        {#<link rel="stylesheet" href="{{ asset('css/styles.css') }}">#}
+        <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     {% endblock %}
 </head>
 
@@ -29,6 +30,7 @@
                 <li><a href="{{ path('index') }}">Accueil</a></li>
                 <li><a href="{{ path('advert_index') }}">Liste des annonces</a></li>
                 <li><a href="{{ path('advert_add') }}">Publier une annonce</a></li>
+                <li><a href="{{ path('app_login') }}"></a>Connexion</li>
             </ul>
 
             <h4>Dernières annonces</h4>
@@ -45,7 +47,7 @@
 </body>
 <footer class="">
     <p>Made with <i style="color: #ff0000;" class="fa fa-heart"></i> by Clémentine <a href="#"
-                                                                                      style="color: #444; text-decoration: underline;"></a>
+                                                                                      style="color: #444; text-decoration: underline;"></a><i class="fas fa-coffee"></i>
     </p>
 </footer>
 
