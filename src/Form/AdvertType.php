@@ -19,7 +19,7 @@ class AdvertType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $pattern = 'C%';
+        $pattern = '%';
 
         $builder
             ->add('date', DateTimeType::class)

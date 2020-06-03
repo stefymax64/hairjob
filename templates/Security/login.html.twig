@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Connexion!{% endblock %}
+{% block title %}Connexion !{% endblock %}
 
 {% block base_body %}
 <form class="form-signin" method="post">
@@ -16,9 +16,10 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
     <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+
     <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
 
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
