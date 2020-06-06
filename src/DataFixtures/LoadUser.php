@@ -20,16 +20,14 @@ class LoadUser extends AppFixtures
 
     protected function loadData(ObjectManager $manager)
     {
-        $user = new User();
-        $user->setPassword($this->passwordEncoder->encodePassword(
-            $user, 'the_new_password'
-        ));
-
         $this->createMany(10, 'main_users', function ($i)
         {
             $user = new User();
             $user->setEmail(sprintf('spacebar%d@example.com', $i));
             $user->setFirstName($this->faker->firstName);
+            $user->setPassword($this->passwordEncoder->encodePassword(
+                $user, 'engage'
+            ));
 
             return $user;
         });

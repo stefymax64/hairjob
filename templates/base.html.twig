@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
               integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
         {#<link rel="stylesheet" href="{{ asset('css/styles.css') }}">#}
-        <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     {% endblock %}
 </head>
 
@@ -32,6 +31,8 @@
                 <li><a href="{{ path('advert_add') }}">Publier une annonce</a></li>
                 {#<li><a href="{{ path('app_registration') }}">Créer un compte</a></li>#}
                 <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                {#<li><a href="{{ path('app_profil') }}">Profil</a></li>#}
+                {#<li><a href="{{ path('app_logout') }}">Déconnexion</a></li>#}
             </ul>
 
             <h4>Dernières annonces</h4>

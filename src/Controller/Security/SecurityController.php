@@ -14,8 +14,6 @@ use App\Entity\user;
 
 class SecurityController extends AbstractController
 {
-
-
     /**
      * @Route("/security/login", name="app_login")
      */
@@ -36,6 +34,6 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new \Exception(('Will be intercepted before getting here '));
     }
 }

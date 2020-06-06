@@ -20,7 +20,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(name="email", type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
@@ -31,7 +31,7 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(name="password", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
