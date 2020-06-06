@@ -45,6 +45,16 @@ class User implements UserInterface
      */
     private $firstName;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $linkedinUsername;
+
+    /**
+     * @ORM\Column(type="integer", length=255)
+     */
+    private $avatarUrl;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +160,33 @@ class User implements UserInterface
     public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLinkedinUsername(): ?string
+    {
+        return $this->linkedinUsername;
+    }
+
+    public function setLinkedinUsername(?string $linkedinUsername): self
+    {
+        $this->linkedinUsername = $linkedinUsername;
+
+        return $this;
+    }
+
+    public function getAvatarUrl(string $size = null): string
+    {
+        $url = 'https://robohash.org/'.$this->getEmail();
+        if ($size)
+            $url .= sprintf('?size=%dx%d', $size, $size);
+        return $url;
+    }
+
+    public function setAvatarUrl(string $avatarUrl): self
+    {
+        $this->avatarUrl = $avatarUrl;
 
         return $this;
     }

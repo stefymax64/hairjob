@@ -9,7 +9,6 @@ use App\Entity\Application;
 use App\Form\AdvertEditType;
 use App\Form\AdvertType;
 use App\Service\SpamGenerator;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -76,7 +75,7 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/advert/add", name="advert_add")
-     * @IsGranted("ROLE_MASTER", message="Espace reservé aux employeurs identifiés !")
+     * @IsGranted("ROLE_ADMIN", message="Espace reservé aux employeurs identifiés !")
      */
     public function add(Request $request)
     {

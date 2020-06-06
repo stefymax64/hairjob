@@ -26,7 +26,6 @@ security:
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime:   2592000 # 30jours en secondes
-                #path:   /
                 # by default, the feature is enabled by checking a
                 # checkbox in the login form (see below), uncomment the
                 # following line to always enable it.
@@ -48,9 +47,14 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        #- { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/master, roles: ROLE_ADMIN }
-        #- { path: ^/worker, roles: ROLE_USER }
+        # but, definitely allow /login to be accessible anonymously
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # require the user to fully login to change password
+        #- { path: ^/change-password, roles: IS_AUTHENTICATED_FULLY }
+        # if you wanted to force EVERY URL to be protected
+        #- { path: ^/, roles: IS_AUTHENTICATED_REMEMBERED }
+        #- { path: ^/admin, roles: ROLE_ADMIN }
+        #- { path: ^/user, roles: ROLE_USER }
     role_hierarchy:
         #ROLE_WORKER:        ROLE_USER
         #ROLE_MASTER:        ROLE_USER
