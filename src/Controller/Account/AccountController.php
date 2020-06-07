@@ -15,15 +15,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccountController extends BaseController
 {
     private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * @Route("/Account", name="app_account")
      */
-    public function index(LoggerInterface $logger)
+    public function index()
     {
         $logger->debug('Checking account page for '.$this->getUser()->getEmail());
 
         return $this->render('Account/index.html.twig', [
             'controller_name' => 'AccountController',
+        ]);
+    }
+
+    /**
+     * @Route("/api/account", name="api_account")
+     */
+    public function accountApi()
+    {
+        $user = $this->getUser();
+        return $this->json($user, 200, [], [
+            'groups' => ['main'],
         ]);
     }
 }

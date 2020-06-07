@@ -75,7 +75,7 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/advert/add", name="advert_add")
-     * @IsGranted("ROLE_ADMIN", message="Espace reservé aux employeurs identifiés !")
+     * @IsGranted("ROLE_ADMIN_ADD", message="Espace reservé aux employeurs identifiés !")
      */
     public function add(Request $request)
     {
@@ -98,6 +98,7 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/advert/edit/{id}", name="advert_edit", requirements={"id" = "\d+"})
+     * @IsGranted("ROLE_ADMIN_ADD", message="Espace reservé aux employeurs identifiés !")
      */
     public function edit(Request $request, $id)
     {
@@ -124,6 +125,7 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/advert/delete/{id}", name="advert_delete", requirements={"id" = "\d+"})
+     * @IsGranted("ROLE_ADMIN_ADD", message="Espace reservé aux employeurs identifiés !")
      */
     public function delete(Request $request, $id)
     {
