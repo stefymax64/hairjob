@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>{% block title %}Bienvenue sur Hair'Job !{% endblock %}</title>
     {% block stylesheets %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <!-- Fonts -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
               integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
-        {#<link rel="stylesheet" href="{{ asset('css/styles.css') }}">#}
+        <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lobster+Two&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Eagle+Lake&display=swap" rel="stylesheet">
+        <!--Style perso CSS-->
+        <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
     {% endblock %}
+
+    <script>
+
+  </script>
 </head>
 
 <body>
@@ -21,72 +34,93 @@
     <a href="{{ path('index', {'_switch_user': '_exit'}) }}">Exit Impersonation</a>
 </div>
 {% endif %}
+    <div id="header" class="header">
+        <!--Titre-->
+        <div class="logo">
+            <a href="{{ path('index') }}">
+                <p class="font_bebas">professional hairdresser</p>
+                <h1 class="font_eagle">Hair'Job</h1>
+                <small class="font_lobster">Since 1975</small>
+            </a>
+        </div>
+        <!--Menu Burger-->
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
+        <ul class="menu">
+            {% if is_granted('ROLE_USER') %}
+            <li>
+                <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
+                <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
+                <a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a>
+            </li>
+            <li>
+                <a href="{{ path('app_account') }}">Profil</a>
+            </li>
+            {% elseif is_granted('ROLE_ADMIN_ADD') %}
+            <li>
+                <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
+                <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
+                <a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a>
+            </li>
+            <li>
+                <a href="{{ path('app_account') }}">Profil</a>
+            </li>
+            {% else %}
+            <li><a href="{{ path('app_registrer') }}">Espace Candicats</a></li>
+            <li><a href="#">Espace Recruteurs</a></li>
+            <li><a href="#">Contact</a></li>
+            {% endif %}
+        </ul>
+    </div>
 <div class="container">
-    <div id="header" class="">
-        <h1>Annonces Coiffure</h1>
-        <h2>Les petites annonces de la coiffure</h2>
-        <p>blablabla...</p>
-    </div>
+    <div id="content" class="">
+        {% block base_body %}
+            <h1>Les petites annonces de la coiffure</h1>
+                <h2>Recherche d'emploi </h2>
+                    <p>Moteur de recherche ici !</p>
+            <p>Carousel collection été 2020</p>
+            <!--Carousel-->
+        <section class="carousel">
 
-    <div class="">
-        <div id="menu" class="">
-            <h3>Les annonces</h3>
-            <nav class="">
-                <div class="" id="">
-                    <ul class="">
-                        <li>
-                            <a href="{{ path('index') }}">Accueil</a>
-                        </li>
-                        {% if is_granted('ROLE_USER') %}
-                            <div class="col-md-2 no-pad">
-                                <div class="user-image">
-                                    <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}">
-                                </div>
-                            </div>
-                            <li>
-                                <a href="{{ path('app_account') }}">Profil</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('app_logout') }}">Déconnexion</a>
-                            </li>
-                            {% if is_granted('ROLE_ADMIN_ADD') %}
-                                <li>
-                                    <a href="{{ path('advert_add') }}">Publier une annonce</a>
-                                </li>
-                            {% endif%}
-                        {% else %}
-                            <li>
-                                <a href="{{ path('advert_index') }}">Liste des annonces</a>
-                            </li>
-                            <li>
-                                <a href="#">Créer un compte</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('app_login') }}">Connexion</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </nav>
-            <h4>Dernières annonces</h4>
-            {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 2})) }}
-        </div>
-        <div id="content" class="">
-            {% block base_body %}
-            {% endblock %}
-        </div>
+        </section>
+        <section class="flex">
+            <ul class="flex">
+                <li class="article">
+                    <article>
+                        <a class="article" href="https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000018563755" target="_blank">
+                            <img class="imgarticle" src="{{ asset('images/site/ccnc.jpg') }}" alt="Convention Collective Nationale de la Coiffure">
+                            <h3>Consultez gratuitement la Convention Collective Nationale de la Coiffure</h3>
+                        </a>
+                    </article>
+                </li>
+                <li class="article">
+                    <article>
+                        <a class="article" href="https://www.legifrance.gouv.fr/affichIDCC.do;jsessionid=E0AC66814C0E96CCBE9FB265AE1A27C5.tplgfr33s_2?idConvention=KALICONT000018563755&cidTexte=KALITEXT000037506094" target="_blank">
+                            <img class="imgarticle" src="{{ asset('images/site/salary.jpg') }}" alt="salaire Minima de la coiffure">
+                            <h3>Consultez le salaire Minima de la coiffure dont vous pouvez prétendre !</h3>
+                        </a>
+                    </article>
+                </li>
+            </ul>
+        </section>
     </div>
-
-    <hr>
+        {% endblock %}
 </div>
 </body>
-<footer class="">
-    <p>Made with <i style="color: #ff0000;" class="fa fa-heart"></i> by Clémentine <a href="#"
-                                                                                      style="color: #444; text-decoration: underline;"></a><i class="fas fa-coffee"></i>
-    </p>
+<footer class="footer">
+    <hr>
+    <h3>Dernières annonces</h3>
+    <p>Pour consulter toutes les offres d'emplois, connectez-vous !</p>
+    {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 5})) }}
+    <p>Made with <i class="fa fa-heart"></i> by <span>Clémentine </span></p>
+    <p><i class="fas fa-coffee"></i><a href="#"> Contact </a></p>
 </footer>
 
 {% block javascripts %}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
 {% endblock %}
 </html>

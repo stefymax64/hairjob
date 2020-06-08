@@ -1,7 +1,7 @@
-<ul class="">
+<ul>
     {% for advert in listAdverts %}
         <li>
-            <a href="{{ path('advert_view', {'id': advert.id}) }}">
+            <a class="menu_footer" href="{{ path('advert_view', {'id': advert.id}) }}">
                 {{ advert.title }}
             </a>
         </li>

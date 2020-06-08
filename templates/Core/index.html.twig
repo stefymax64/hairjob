@@ -6,15 +6,35 @@
 
 {% block layout_body %}
 
-    <h2>Page d'accueil du site</h2>
-
     {% for message in app.session.flashBag.get('info') %}
         <div>Message flash : {{ message }}</div>
     {% endfor %}
 
+    <h2>Recherche d'emploi </h2>
+    <p>Moteur de recherche ici !</p>
+
+    <section class="flex">
+        <ul class="flex">
+            <li class="article">
+                <article>
+                    <a href="#">
+                        <img class="imgarticle" src="#" alt="">
+                        <h3>Convention Nationale de la Coiffure</h3>
+                    </a>
+                </article>
+            </li>
+            <li class="article">
+                <article>
+                    <a href="#">
+                        <img class="imgarticle" src="#" alt="">
+                        <h3>Salaire Minima de la coiffure</h3>
+                    </a>
+                </article>
+            </li>
+        </ul>
+    </section>
+
     <h3>Dernières annonces</h3>
     {{ render(controller("App\\Controller\\AdvertController::menu", {'limit': 3})) }}
-
-    <h3>Une autre section au choix</h3>
 
 {% endblock %}

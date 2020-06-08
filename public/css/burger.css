@@ -1,0 +1,122 @@
+/*Menu Burger CSS*/
+
+.header ul {
+    list-style: none;
+    overflow: hidden; /*disparition lors du chgt d'écran*/
+    background-color: #fff;
+}
+
+.header ul a {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+}
+
+.header ul a:hover {
+    background-color: #cd5c5c;
+}
+
+.header .logo {
+    display: block;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.logo{
+    text-align: center;
+}
+.header .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+.header .menu-icon {
+    padding: 28px 20px;
+    position: relative;
+    float: right;
+    cursor: pointer;
+}
+
+.header .menu-icon .nav-icon {
+    background: #9A625A;
+    display: block;
+    height: 2px;
+    width: 18px;
+    position: relative;
+    transition: background .2S ease-out;
+}
+
+.header .menu-icon .nav-icon:before {
+    background: #9A625A;
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    top: 5px;
+}
+
+.header .menu-icon .nav-icon:after {
+    background: #9A625A;
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    top: -5px;
+}
+
+.header .menu-btn {
+    display: none;
+}
+
+.header .menu-btn:checked~.menu {
+    max-height: 400px;
+}
+
+.header .menu-btn:checked~.menu-icon .nav-icon {
+    background-color: transparent;
+}
+
+.header .menu-btn:checked~.menu-icon .nav-icon:before {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+.header .menu-btn:checked~.menu-icon .nav-icon:after {
+    transform: rotate(45deg);
+    top: 0;
+}
+/*Fin Menu Burger*/
+
+/* VERSION RESPONSIVE */
+@media screen and (min-width:48em) {
+    /*Menu Burger*/
+    .header .menu {
+        width: 95%;
+        margin: 0 auto 20px;
+        max-height: none;
+    }
+    .menu{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-left: 0;
+    }
+    .header .menu-icon {
+        display: none;
+    }
+    /*fin menu burger*/
+
+}
+@media screen and (min-width:64em) {
+    /*Header*/
+    .header{
+        margin: 0 auto;
+        background-color: #fff;
+        box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
+    }
+
+}
