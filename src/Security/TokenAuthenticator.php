@@ -8,6 +8,7 @@ use App\Repository\ApiTokenRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
@@ -49,8 +50,16 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         ]);
 
         if (!$token) {
-            return;
+            throw new CustomUserMessageAuthenticationException(
+                'Invalid API Token'
+            );
         }
+        if ($token->isExpired()) {
+            throw new CustomUserMessageAuthenticationException(
+                'Token expired'
+            );
+        }
+
         return $token->getUser();
     }
 
@@ -59,7 +68,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        dd('checking credentials');
+        return true;
     }
 
     /**
@@ -86,7 +95,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-
+        throw new \Exception('Not used: entry_point from other authentication is used');
     }
 
     /**
@@ -94,6 +103,6 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supportsRememberMe()
     {
-
+        return false;
     }
 }
