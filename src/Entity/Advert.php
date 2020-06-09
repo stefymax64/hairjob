@@ -33,11 +33,6 @@ class Advert
     private $title;
 
     /**
-     * @ORM\Column(name="author", type="string", length=255)
-     */
-    private $author;
-
-    /**
      * @ORM\Column(name="content", type="string", length=255)
      */
     private $content;
@@ -78,6 +73,11 @@ class Advert
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $author;
 
     public function __construct()
     {
@@ -129,18 +129,6 @@ class Advert
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -273,4 +261,18 @@ class Advert
 
         return $this;
     }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+
 }

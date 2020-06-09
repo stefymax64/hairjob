@@ -75,7 +75,7 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/advert/add", name="advert_add")
-     * @IsGranted("ROLE_ADMIN_ADD", message="Espace reservé aux employeurs identifiés !")
+     * @IsGranted("ROLE_ADMIN_ADD", message="Espace reservé aux recruteurs identifiés !")
      */
     public function add(Request $request)
     {

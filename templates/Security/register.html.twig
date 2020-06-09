@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 {% endblock %}
 {% block base_body %}
-<h3>Connectez-vous ou créer votre compte candidat</h3>
-    <p>Si vous souhaitez consulter toutes les offres d'emplois dans votre région, créer votre espace candidat ou connectez-vous :</p>
-    <li>
-        <a href="{{ path('app_login') }}">Connexion</a>
-    </li>
+<h2 class="connect">Connectez-vous ou créer votre compte candidat</h2>
+    <p>Si vous souhaitez consulter toutes les offres d'emplois disponbles dans votre région, créer votre espace candidat ou connectez-vous :</p>
+    <div class="connect">
+        <a class="connect" href="{{ path('app_login') }}">Connexion</a>
+    </div>
 
 <form class="form-signin" method="post">
     {# todo - replace with a Symfony form! #}
@@ -35,7 +35,7 @@
             <input type="hidden" name="_target_path" value="/account" />
         #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="connect" type="submit">
         Enregistrer
     </button>
 </form>

@@ -38,7 +38,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", unique=true, nullable=true)
+     * @ORM\OneToMany(targetEntity=ApiToken::class, mappedBy="user")
      */
     private $apitoken;
 
@@ -58,6 +58,7 @@ class User implements UserInterface
      * @ORM\Column(type="integer", length=255, nullable=true)
      */
     private $avatarUrl;
+
 
     public function getId(): ?int
     {
@@ -194,4 +195,6 @@ class User implements UserInterface
 
         return $this;
     }
+
+
 }

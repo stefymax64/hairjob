@@ -2,9 +2,9 @@
 
 namespace App\Controller\Account;
 
-use App\Controller\BaseController;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller\Account
  * @IsGranted("ROLE_USER")
  */
-class AccountController extends BaseController
+class AccountController extends AbstractController
 {
     private $logger;
 
@@ -24,7 +24,7 @@ class AccountController extends BaseController
     /**
      * @Route("/Account", name="app_account")
      */
-    public function index()
+    public function index(LoggerInterface $logger)
     {
         $logger->debug('Checking account page for '.$this->getUser()->getEmail());
 

@@ -28,7 +28,7 @@ class ApiToken
     private $expiresAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="apiToken")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="apitoken")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -69,6 +69,12 @@ class ApiToken
         return $this;
     }
 
+    
+    public function isExpired(): bool
+    {
+        return true;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -79,9 +85,5 @@ class ApiToken
         $this->user = $user;
 
         return $this;
-    }
-    public function isExpired(): bool
-    {
-        return true;
     }
 }
