@@ -1,45 +1,21 @@
 <?php
 
-namespace App\Controller\Security;
+namespace App\Controller\Security\Recruiter;
 
+use App\Controller\Security\Candidat\SecurityController;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use App\Security\LoginFormAuthenticator;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Request;
 
-class SecurityController extends AbstractController
+class SecurityControllerRecruiter extends SecurityController
 {
-    /**
-     * @Route("/security/login", name="app_login")
-     */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('security/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error' => $error]);
-    }
 
     /**
-     * @Route("/security/logout", name="app_logout")
-     */
-    public function logout()
-    {
-        throw new \Exception(('Will be intercepted before getting here '));
-    }
-
-    /**
-     * @Route("/register", name="app_registrer")
+     * @Route("/register_recruiter", name="app_registrer_recruiter")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardAuthenticatorHandler, LoginFormAuthenticator $formAuthenticator)
     {
@@ -47,11 +23,12 @@ class SecurityController extends AbstractController
         {
             $user = new User();
             $user->setEmail($request->request->get('email'));
-            $user->setFirstName('Mystery');
+            $user->setFirstName('firstName');
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
                 $request->request->get('password')
             ));
+            $user->setSiret($request->request->get('siret'));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -65,6 +42,6 @@ class SecurityController extends AbstractController
             );
         }
 
-        return $this->render('security/register.html.twig');
+        return $this->render('Security/registerRecruiter.html.twig');
     }
 }

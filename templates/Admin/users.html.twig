@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des utilisateurs{% endblock %}
+
+{% block base_body %}
+    <h1>Administration des utilisateurs</h1>
+    <table class="fa-table">
+        <thead>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>N° Siret</th>
+            <th>Rôles</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.siret }}</td>
+                    <td>
+                        {% for role in user.roles %}
+                            {% if role == "ROLE_USER" %}
+                                Candidat
+                            {% elseif role == "ROLE_RECRUITER"%}
+                                Recruteur
+                            {% elseif role == "ROLE_ADMIN" %}
+                                Administrateur
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_edit_users', {'id' : user.id}) }}" class="connect">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Il n'y a pas d'utilisateurs inscrits !</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -59,7 +59,7 @@
                 <li>
                     <a href="{{ path('advert_add') }}">Publier une annonce</a>
                 </li>
-            {% elseif is_granted('ROLE_ADMIN_ADD') %}
+            {% elseif is_granted('ROLE_RECRUITER') %}
             <li>
                 <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
                 <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
@@ -73,7 +73,7 @@
                 </li>
             {% else %}
             <li><a href="{{ path('app_registrer') }}">Espace Candicats</a></li>
-            <li><a href="#">Espace Recruteurs</a></li>
+            <li><a href="{{ path('app_registrer_recruiter')}}">Espace Recruteurs</a></li>
             <li><a href="#">Contact</a></li>
             {% endif %}
         </ul>
@@ -119,6 +119,7 @@
     <a>Pour consulter toutes les offres d'emplois, <a href="{{ path('app_login') }}">connectez-vous !</a></p>
     {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 5})) }}
     <p>Made with <i class="fa fa-heart"></i> by <span>Clémentine </span></p>
+        <li><a href="{{ path('admin_users') }}">Espace Administrateur</a></li>
     <p><i class="fas fa-coffee"></i><a href="{{ path('core_contact') }}"> Contact </a></p>
 </footer>
 

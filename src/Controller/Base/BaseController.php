@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Base;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +18,7 @@ abstract class BaseController extends AbstractController
     }
 
     /**
-     * @Route("/base", name="base")
+     * @Route("/base", name="app_base")
      */
     public function index()
     {

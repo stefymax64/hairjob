@@ -59,6 +59,12 @@ class User implements UserInterface
      */
     private $avatarUrl;
 
+    /**
+     * @ORM\Column(type="integer", length=14, nullable=true)
+     */
+    private $siret;
+
+
 
     public function getId(): ?int
     {
@@ -192,6 +198,18 @@ class User implements UserInterface
     public function setAvatarUrl(string $avatarUrl): self
     {
         $this->avatarUrl = $avatarUrl;
+
+        return $this;
+    }
+
+    public function getSiret(): ?int
+    {
+        return $this->siret;
+    }
+
+    public function setSiret(int $siret): self
+    {
+        $this->siret = $siret;
 
         return $this;
     }

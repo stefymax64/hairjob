@@ -1,9 +1,11 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    #Encodage des mots de passe
     encoders:
         App\Entity\User:
             algorithm: auto
 
+    #Fournisseur d'authentification
     providers:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
@@ -11,6 +13,7 @@ security:
                 class: App\Entity\User
                 property: email
 
+    #Différents types de connexion
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -49,16 +52,12 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+    #Contrôle d'accès
     access_control:
-        # but, definitely allow /login to be accessible anonymously
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        # require the user to fully login to change password
-        #- { path: ^/change-password, roles: IS_AUTHENTICATED_FULLY }
-        # if you wanted to force EVERY URL to be protected
-        #- { path: ^/, roles: IS_AUTHENTICATED_REMEMBERED }
         #- { path: ^/admin, roles: ROLE_ADMIN }
-        #- { path: ^/user, roles: ROLE_USER }
+        #- { path: ^/profil, roles: ROLE_USER }
+    #hierarchiser les rôles
     role_hierarchy:
         ROLE_USER:          [ROLE_USER]
-        ROLE_ADMIN:         [ROLE_USER, ROLE_ADMIN_ADD, ROLE_ALLOWED_TO_SWITCH]
-        #ROLE_SUPER_ADMIN:   [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_RECRUITER:     [ROLE_USER]
+        ROLE_ADMIN:         [ROLE_RECUITER, ROLE_ALLOWED_TO_SWITCH]
