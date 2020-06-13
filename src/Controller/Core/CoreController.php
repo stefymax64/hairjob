@@ -18,4 +18,28 @@ class CoreController extends AbstractController
             'subtitle' => 'Bienvenue'
     ]);
     }
+
+    /**
+     * @Route("/legalnotice", name="legal_notice")
+     */
+    public function legalNotice()
+    {
+        return $this->render('Core\legalnotice.html.twig');
+    }
+
+    /**
+     * @Route("/rgdp", name="legal_rgpd")
+     */
+    public function rgpd()
+    {
+        return $this->render('Core/rgpd.html.twig');
+    }
+
+    /**
+     * @Route("/cookies", name="legal_cookies")
+     */
+    public function cookies()
+    {
+        return $this->render('Core/cookies.html.twig');
+    }
 }

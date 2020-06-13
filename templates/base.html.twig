@@ -116,11 +116,17 @@
 <footer class="footer">
     <hr>
     <h3>Dernières annonces</h3>
-    <a>Pour consulter toutes les offres d'emplois, <a href="{{ path('app_login') }}">connectez-vous !</a></p>
+    <a>Pour consulter toutes les offres d'emplois, <i class="fas fa-user-lock"></i><a href="{{ path('app_login') }}"> connectez-vous !</a></p>
     {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 5})) }}
     <p>Made with <i class="fa fa-heart"></i> by <span>Clémentine </span></p>
-        <li><a href="{{ path('admin_users') }}">Espace Administrateur</a></li>
-    <p><i class="fas fa-coffee"></i><a href="{{ path('app_contact') }}"> Contact </a></p>
+        <ul>
+            <li><i class="fas fa-lock"></i><a href="{{ path('admin_users') }}"> Espace Administrateur</a></li>
+            <li><i class="fas fa-coffee"></i><a href="{{ path('app_contact') }}"> Contact </a></li>
+            <li><i class="fas fa-user-edit"></i><a href="{{ path('legal_notice') }}"> Mentions Légales</a> </li>
+            <li><i class="fas fa-user-secret"></i><a href="{{ path('legal_rgpd') }}"> Charte de protection des données personnelles</a> </li>
+            <li><i class="fas fa-cookie"></i><a href="{{ path('legal_cookies') }}"> Politique relative aux cookies</a> </li>
+        </ul>
+
 </footer>
 
 {% block javascripts %}
