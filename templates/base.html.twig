@@ -74,7 +74,7 @@
             {% else %}
             <li><a href="{{ path('app_registrer') }}">Espace Candicats</a></li>
             <li><a href="{{ path('app_registrer_recruiter')}}">Espace Recruteurs</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{{ path('app_contact')}}">Contact</a></li>
             {% endif %}
         </ul>
     </div>
@@ -120,7 +120,7 @@
     {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 5})) }}
     <p>Made with <i class="fa fa-heart"></i> by <span>Clémentine </span></p>
         <li><a href="{{ path('admin_users') }}">Espace Administrateur</a></li>
-    <p><i class="fas fa-coffee"></i><a href="{{ path('core_contact') }}"> Contact </a></p>
+    <p><i class="fas fa-coffee"></i><a href="{{ path('app_contact') }}"> Contact </a></p>
 </footer>
 
 {% block javascripts %}

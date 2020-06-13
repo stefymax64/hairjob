@@ -17,6 +17,8 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/security/login", name="app_login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -38,6 +40,11 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/register", name="app_registrer")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param GuardAuthenticatorHandler $guardAuthenticatorHandler
+     * @param LoginFormAuthenticator $formAuthenticator
+     * @return Response|null
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardAuthenticatorHandler, LoginFormAuthenticator $formAuthenticator)
     {
@@ -63,6 +70,6 @@ class SecurityController extends AbstractController
             );
         }
 
-        return $this->render('security/register.html.twig');
+        return $this->render('Security/register.html.twig');
     }
 }

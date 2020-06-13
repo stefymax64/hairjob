@@ -8,9 +8,12 @@ use App\Entity\AdvertSkill;
 use App\Entity\Application;
 use App\Form\AdvertEditType;
 use App\Form\AdvertType;
+use App\Service\AdvertClean;
 use App\Service\SpamGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -19,6 +22,8 @@ class AdvertController extends AbstractController
 {
     /**
      * @Route("/advert/{page}", name="advert_index", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @param $page
+     * @return Response
      */
     public function index($page)
     {
@@ -76,6 +81,8 @@ class AdvertController extends AbstractController
     /**
      * @Route("/advert/add", name="advert_add")
      * @IsGranted("ROLE_RECRUITER", message="Espace reservé aux recruteurs identifiés !")
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function add(Request $request)
     {
@@ -99,6 +106,9 @@ class AdvertController extends AbstractController
     /**
      * @Route("/advert/edit/{id}", name="advert_edit", requirements={"id" = "\d+"})
      * @IsGranted("ROLE_RECRUITER", message="Espace reservé aux employeurs identifiés !")
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse|Response
      */
     public function edit(Request $request, $id)
     {
@@ -126,6 +136,9 @@ class AdvertController extends AbstractController
     /**
      * @Route("/advert/delete/{id}", name="advert_delete", requirements={"id" = "\d+"})
      * @IsGranted("ROLE_RECRUITER", message="Espace reservé aux employeurs identifiés !")
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse|Response
      */
     public function delete(Request $request, $id)
     {
@@ -166,13 +179,13 @@ class AdvertController extends AbstractController
 
     public function new(SpamGenerator $spamGenerator)
     {
-        $message = $spamGenerator->getSpamMessage();
-        $this->addFlash('success', $message);
+        $messages = $spamGenerator->getSpamMessage();
+        $this->addFlash('success', $messages);
     }
 
     public function cleanUp(Request $request, $days)
     {
-        $cleaner = $this->get('app.service.advert_clean');
+        $cleaner = $this->get(AdvertClean::class);
         $cleaner->purge($days);
         $request->getSession()->getFlashBag()->add('info', 'Les annonces plus anciennes que ' . $days . ' jours ont étés nettoyées.');
 

@@ -64,8 +64,6 @@ class User implements UserInterface
      */
     private $siret;
 
-
-
     public function getId(): ?int
     {
         return $this->id;

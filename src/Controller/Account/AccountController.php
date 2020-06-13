@@ -2,9 +2,10 @@
 
 namespace App\Controller\Account;
 
+use App\Controller\Base\BaseController;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller\Account
  * @IsGranted("ROLE_USER")
  */
-class AccountController extends AbstractController
+class AccountController extends BaseController
 {
     private $logger;
 
@@ -23,6 +24,8 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/Account", name="app_account")
+     * @param LoggerInterface $logger
+     * @return Response
      */
     public function index(LoggerInterface $logger)
     {
