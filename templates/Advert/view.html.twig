@@ -15,17 +15,17 @@
     <h2>{{ advert.title }}</h2>
     <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
 
-    <div class="">
+    <div>
         {{ advert.content|raw }}
     </div>
     <br>
     {% if not advert.categories.empty %}
-        <p>
+        <div>
             Cette annonce est parue dans les catégories suivantes :
             {% for category in advert.categories %}
                 {{ category.name }}{% if not loop.last %}, {% endif %}
             {% endfor %}
-        </p>
+        </div>
     {% endif %}
 
     {% if listAdvertSkills|length > 0 %}
@@ -38,20 +38,18 @@
             </ul>
         </div>
     {% endif %}
-
-    <p>
-        <a href="{{ path('advert_index') }}" class="">
+<br>
+    <section class="info">
+        <article>
             <i class=""></i>
-            Retour à la liste
-        </a>
-        <a href="{{ path('advert_edit', {'id': advert.id}) }}" class="">
+            <a href="{{ path('advert_index') }}">Retour à la liste</a>
+        </article>
             <i class=""></i>
-            Modifier l'annonce
-        </a>
-        <a href="{{ path('advert_delete', {'id': advert.id}) }}" class="">
+            <a href="{{ path('advert_edit', {'id': advert.id}) }}">Modifier l'annonce</a>
+        <article>
             <i class=""></i>
-            Supprimer l'annonce
-        </a>
-    </p>
+            <a href="{{ path('advert_delete', {'id': advert.id}) }}">Supprimer l'annonce</a>
+        </article>
+    </section>
 
 {% endblock %}

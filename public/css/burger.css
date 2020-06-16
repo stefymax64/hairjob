@@ -89,13 +89,18 @@
     transform: rotate(45deg);
     top: 0;
 }
+.nav-profile-img {
+    position: absolute;
+    top: 45px;
+    left: 5px;
+}
 /*Fin Menu Burger*/
 
 /* VERSION RESPONSIVE */
 @media screen and (min-width:48em) {
     /*Menu Burger*/
     .header .menu {
-        width: 95%;
+        width: 80%;
         margin: 0 auto 20px;
         max-height: none;
     }
@@ -108,6 +113,11 @@
     .header .menu-icon {
         display: none;
     }
+    .nav-profile-img {
+        position: absolute;
+        top: 15px;
+        left: 0px;
+    }
     /*fin menu burger*/
 
 }
@@ -118,5 +128,9 @@
         background-color: #fff;
         box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
     }
-
+    .nav-profile-img {
+        position: absolute;
+        top: 20px;
+        left: 50px;
+    }
 }

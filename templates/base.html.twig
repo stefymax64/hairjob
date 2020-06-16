@@ -8,7 +8,9 @@
     {% block stylesheets %}
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+              crossorigin="anonymous">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
@@ -24,117 +26,133 @@
 
     <script>
 
-  </script>
+    </script>
 </head>
 
 <body>
 {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-<div class="alert alert-warning" style="margin-bottom: 0;">
-    You are currently switched to this user.
-    <a href="{{ path('index', {'_switch_user': '_exit'}) }}">Exit Impersonation</a>
-</div>
-{% endif %}
-    <div id="header" class="header">
-        <!--Titre-->
-        <div class="logo">
-            <a href="{{ path('index') }}">
-                <p class="font_bebas">professional hairdresser</p>
-                <h1 class="font_eagle">Hair'Job</h1>
-                <small class="font_lobster">Since 1975</small>
-            </a>
-        </div>
-        <!--Menu Burger-->
-        <input class="menu-btn" type="checkbox" id="menu-btn" />
-        <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
-        <ul class="menu">
-            {% if is_granted('ROLE_USER') %}
-            <li>
-                <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
-                <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
-                <a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a>
-            </li>
-            <li>
-                <a href="{{ path('app_account') }}">Profil</a>
-            </li>
-                <li>
-                    <a href="{{ path('advert_add') }}">Publier une annonce</a>
-                </li>
-            {% elseif is_granted('ROLE_RECRUITER') %}
-            <li>
-                <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
-                <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
-                <a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a>
-            </li>
-            <li>
-                <a href="{{ path('app_account') }}">Profil</a>
-            </li>
-                <li>
-                    <a href="{{ path('advert_add') }}">Publier une annonce</a>
-                </li>
-            {% else %}
-            <li><a href="{{ path('app_registrer') }}">Espace Candicats</a></li>
-            <li><a href="{{ path('app_registrer_recruiter')}}">Espace Recruteurs</a></li>
-            <li><a href="{{ path('app_contact')}}">Contact</a></li>
-            {% endif %}
-        </ul>
+    <div class="alert alert-warning" style="margin-bottom: 0;">
+        You are currently switched to this user.
+        <a href="{{ path('index', {'_switch_user': '_exit'}) }}">Exit Impersonation</a>
     </div>
+{% endif %}
+<div id="header" class="header">
+    <!--Titre-->
+    <div class="logo">
+        <a href="{{ path('index') }}">
+            <p class="font_bebas">professional hairdresser</p>
+            <h1 class="font_eagle">Hair'Job</h1>
+            <small class="font_lobster">Since 1975</small>
+        </a>
+    </div>
+    <!--Menu Burger-->
+    <input class="menu-btn" type="checkbox" id="menu-btn"/>
+    <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
+    <ul class="menu">
+        {% if is_granted('ROLE_USER') %}
+            <li>
+                <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
+                <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
+            </li>
+            <li><a href="{{ path('app_account') }}">Profil</a></li>
+            <li><a href="{{ path('app_contact') }}">Contact</a></li>
+            <li><a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a></li>
+
+        {% elseif is_granted('ROLE_RECRUITER') %}
+            <li>
+                <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
+                <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
+            </li>
+            <li><a href="{{ path('app_account') }}">Profil</a></li>
+            <li><a href="{{ path('advert_add') }}">Publier une annonce</a></li>
+            <li><a href="{{ path('app_contact') }}">Contact</a></li>
+            <li><a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a></li>
+        {% else %}
+            <li><a href="{{ path('app_registrer') }}">Espace Candicats</a></li>
+            <li><a href="{{ path('app_registrer_recruiter') }}">Espace Recruteurs</a></li>
+            <li><a href="{{ path('app_contact') }}">Contact</a></li>
+        {% endif %}
+    </ul>
+</div>
 <div class="container">
     <div id="content" class="">
         {% block base_body %}
-            <h1>Les petites annonces de la coiffure</h1>
-                <h2>Recherche d'emploi </h2>
-                    <p>Moteur de recherche ici !</p>
-            <p>Carousel collection été 2020</p>
-            <!--Carousel-->
+        <h1>Les petites annonces de la coiffure</h1>
+        <h2>Recherche d'emploi </h2>
+        <p>Moteur de recherche ici !</p>
+        <p>Carousel collection été 2020</p>
+        <!--Carousel-->
         <section class="carousel">
 
         </section>
         <section class="flex">
             <ul class="flex">
                 <li class="article">
-                    <article>
-                        <a class="article" href="https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000018563755" target="_blank">
-                            <img class="imgarticle" src="{{ asset('images/site/ccnc.jpg') }}" alt="Convention Collective Nationale de la Coiffure">
-                            <p>Consultez gratuitement la Convention Collective Nationale de la Coiffure</p>
-                        </a>
-                    </article>
+                    <a href="https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000018563755"
+                       target="_blank">
+                        <img class="imgarticle" src="{{ asset('images/site/ccnc.jpg') }}"
+                             alt="Convention Collective Nationale de la Coiffure">
+                        Consultez gratuitement la Convention Collective Nationale de la Coiffure
+                    </a>
                 </li>
                 <li class="article">
-                    <article>
-                        <a class="article" href="https://www.legifrance.gouv.fr/affichIDCC.do;jsessionid=E0AC66814C0E96CCBE9FB265AE1A27C5.tplgfr33s_2?idConvention=KALICONT000018563755&cidTexte=KALITEXT000037506094" target="_blank">
-                            <img class="imgarticle" src="{{ asset('images/site/salary.jpg') }}" alt="salaire Minima de la coiffure">
-                            <p>Consultez le salaire Minima de la coiffure dont vous pouvez prétendre !</p>
-                        </a>
-                    </article>
+                    <a href="https://www.legifrance.gouv.fr/affichIDCC.do;jsessionid=E0AC66814C0E96CCBE9FB265AE1A27C5.tplgfr33s_2?idConvention=KALICONT000018563755&cidTexte=KALITEXT000037506094"
+                       target="_blank">
+                        <img class="imgarticle" src="{{ asset('images/site/salary.jpg') }}"
+                             alt="salaire Minima de la coiffure">
+                        Consultez le salaire Minima de la coiffure dont vous pouvez prétendre !
+                    </a>
                 </li>
             </ul>
         </section>
     </div>
-        {% endblock %}
+    {% endblock %}
 </div>
 </body>
-<footer class="footer">
+<footer>
     <hr>
-    <nav>
-    <h3>Dernières annonces</h3>
-    <p>Pour consulter toutes les offres d'emplois, <i class="fas fa-user-lock"></i><a href="{{ path('app_login') }}"> connectez-vous !</a></p>
-    {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 5})) }}
-    <p>Made with <i class="fa fa-heart"></i> by <span>Clémentine </span></p>
-        <ul>
-            <li><i class="fas fa-lock"></i><a href="{{ path('admin_users') }}"> Espace Administrateur</a></li>
-            <li><i class="fas fa-coffee"></i><a href="{{ path('app_contact') }}"> Contact </a></li>
-            <li><i class="fas fa-user-edit"></i><a href="{{ path('legal_notice') }}"> Mentions Légales</a> </li>
-            <li><i class="fas fa-user-secret"></i><a href="{{ path('legal_rgpd') }}"> Charte de protection des données personnelles</a> </li>
-            <li><i class="fas fa-cookie"></i><a href="{{ path('legal_cookies') }}"> Politique relative aux cookies</a> </li>
-        </ul>
+    <nav class="footer">
+        <a href="{{ path('advert_index') }}">Consulter les dernières annonces</a>
+        <p>Pour consulter toutes les offres d'emplois, <i class="fas fa-user-lock"></i><a
+                    href="{{ path('app_login') }}"> connectez-vous !</a></p>
+        {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 3})) }}
     </nav>
+        <hr>
+    <section class="info">
+        <article>
+            <i class="fas fa-lock"></i>
+            <a href="{{ path('admin_users') }}"> Espace Administrateur</a>
+        </article>
+        <article>
+            <i class="fas fa-coffee"></i>
+            <a href="{{ path('app_contact') }}"> Contact </a>
+        </article>
+        <article>
+            <i class="fas fa-user-edit"></i>
+            <a href="{{ path('legal_notice') }}"> Mentions Légales</a>
+        </article>
+        <article>
+            <i class="fas fa-user-secret"></i>
+            <a href="{{ path('legal_rgpd') }}"> Charte de protection des données personnelles</a>
+        </article>
+        <article>
+            <i class="fas fa-cookie"></i>
+            <a href="{{ path('legal_cookies') }}"> Politique relative aux cookies</a>
+        </article>
+    </section>
+    <hr>
+    <p  class="footer">Made with <i class="fa fa-heart"></i> by <span>Clémentine </span></p>
 </footer>
 
 {% block javascripts %}
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
 {% endblock %}
 </html>
