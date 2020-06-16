@@ -6,7 +6,6 @@ use App\Repository\SkillRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="skill")
  * @ORM\Entity(repositoryClass=SkillRepository::class)
  */
 class Skill
@@ -19,7 +18,7 @@ class Skill
     private $id;
 
     /**
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 

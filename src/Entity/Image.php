@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass=ImageRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
@@ -16,17 +15,17 @@ class Image
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $url;
 
     /**
-     * @ORM\Column(name="alt", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $alt;
 

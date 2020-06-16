@@ -6,7 +6,6 @@ use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  */
 class Category
@@ -14,12 +13,12 @@ class Category
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 

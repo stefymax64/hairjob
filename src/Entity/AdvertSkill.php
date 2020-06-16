@@ -6,7 +6,6 @@ use App\Repository\AdvertSkillRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="advert_skill")
  * @ORM\Entity(repositoryClass=AdvertSkillRepository::class)
  */
 class AdvertSkill
@@ -14,12 +13,12 @@ class AdvertSkill
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(name="level", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $level;
 

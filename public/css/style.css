@@ -138,6 +138,14 @@ img.imgarticle:hover {
     border-radius: 5px;
     border: 1px solid #fff;
 }
+
+/*******Advert********/
+img.imgadvert {
+    max-width: 25%;
+    border-radius: 3%;
+    position: relative;
+    box-shadow: 0 2px 5px 1px #d7d7d7;
+}
 /*********FOOTER*********/
 .footer{
     text-align: center;

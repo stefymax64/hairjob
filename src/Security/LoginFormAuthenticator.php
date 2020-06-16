@@ -44,13 +44,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $credentials = [
             'email' => $request->request->get('email'),
+            'firstName' => $request->request->get('firstName'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
 
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['email']
+            $credentials[
+                'email']
         );
 
         return $credentials;

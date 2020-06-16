@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table()
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements UserInterface
@@ -16,7 +17,7 @@ class User implements UserInterface
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
@@ -63,6 +64,11 @@ class User implements UserInterface
      * @ORM\Column(type="integer", length=14, nullable=true)
      */
     private $siret;
+
+    public function __construct()
+    {
+        $this->apitoken = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -212,5 +218,26 @@ class User implements UserInterface
         return $this;
     }
 
+    public function addApitoken(ApiToken $apitoken): self
+    {
+        if (!$this->apitoken->contains($apitoken)) {
+            $this->apitoken[] = $apitoken;
+            $apitoken->setUser($this);
+        }
 
+        return $this;
+    }
+
+    public function removeApitoken(ApiToken $apitoken): self
+    {
+        if ($this->apitoken->contains($apitoken)) {
+            $this->apitoken->removeElement($apitoken);
+            // set the owning side to null (unless already changed)
+            if ($apitoken->getUser() === $this) {
+                $apitoken->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 }

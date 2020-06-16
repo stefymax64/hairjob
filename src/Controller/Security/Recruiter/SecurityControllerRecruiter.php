@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SecurityControllerRecruiter extends SecurityController
 {
+    private $firstName;
 
     /**
      * @Route("/register_recruiter", name="app_registrer_recruiter")
@@ -23,7 +24,7 @@ class SecurityControllerRecruiter extends SecurityController
         {
             $user = new User();
             $user->setEmail($request->request->get('email'));
-            $user->setFirstName($firstName);
+            $user->setFirstName($request->request->get('firstName'));
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
                 $request->request->get('password')

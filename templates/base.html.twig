@@ -115,8 +115,9 @@
 </body>
 <footer class="footer">
     <hr>
+    <nav>
     <h3>Dernières annonces</h3>
-    <a>Pour consulter toutes les offres d'emplois, <i class="fas fa-user-lock"></i><a href="{{ path('app_login') }}"> connectez-vous !</a></p>
+    <p>Pour consulter toutes les offres d'emplois, <i class="fas fa-user-lock"></i><a href="{{ path('app_login') }}"> connectez-vous !</a></p>
     {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 5})) }}
     <p>Made with <i class="fa fa-heart"></i> by <span>Clémentine </span></p>
         <ul>
@@ -126,7 +127,7 @@
             <li><i class="fas fa-user-secret"></i><a href="{{ path('legal_rgpd') }}"> Charte de protection des données personnelles</a> </li>
             <li><i class="fas fa-cookie"></i><a href="{{ path('legal_cookies') }}"> Politique relative aux cookies</a> </li>
         </ul>
-
+    </nav>
 </footer>
 
 {% block javascripts %}

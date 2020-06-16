@@ -3,13 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\AdvertRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="advert")
  * @ORM\Entity(repositoryClass=AdvertRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
@@ -18,27 +19,27 @@ class Advert
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 
     /**
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
-     * @ORM\Column(name="content", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $content;
 
     /**
-     * @ORM\Column(name="published", type="boolean")
+     * @ORM\Column(type="boolean")
      */
     private $published = true;
 
@@ -59,18 +60,21 @@ class Advert
     private $applications;
 
     /**
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @var \DateTime $updatedAt
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
-     * @ORM\Column(name="nb_applications", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $nbApplications = 0;
 
     /**
      * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     * @ORM\Column(length=128, unique=true)
      */
     private $slug;
 
@@ -81,7 +85,7 @@ class Advert
 
     public function __construct()
     {
-        $this->date = new \Datetime();
+        $this->date = new Datetime();
         $this->categories = new ArrayCollection();
         $this->applications = new ArrayCollection();
     }
@@ -91,7 +95,7 @@ class Advert
      */
     public function updateDate()
     {
-        $this->setUpdatedAt(new \DateTime());
+        $this->setUpdatedAt(new DateTime());
     }
 
     public function increaseApplication()
@@ -255,13 +259,6 @@ class Advert
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
     public function getAuthor(): ?string
     {
         return $this->author;
@@ -270,6 +267,13 @@ class Advert
     public function setAuthor(string $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
         {
             $user = new User();
             $user->setEmail($request->request->get('email'));
-            $user->setFirstName('firstName');
+            $user->setFirstName($request->request->get('firstName'));
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
                 $request->request->get('password')

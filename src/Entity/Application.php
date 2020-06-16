@@ -6,7 +6,6 @@ use App\Repository\ApplicationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="application")
  * @ORM\Entity(repositoryClass=ApplicationRepository::class)
  * @ORM\HasLifecycleCallbacks()
  */
@@ -15,22 +14,22 @@ class Application
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $author;
 
     /**
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(type="text")
      */
     private $content;
 
     /**
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(type="datetime")
      */
     private $date;
 

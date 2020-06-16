@@ -6,8 +6,10 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-fixtures-bundle": "~3.3",
+        "friendsofsymfony/ckeditor-bundle": "^2.2",
         "fzaninotto/faker": "^1.9",
         "gedmo/doctrine-extensions": "^2.4",
+        "helios-ag/fm-elfinder-bundle": "^10.0",
         "sensio/framework-extra-bundle": "^5.5",
         "stof/doctrine-extensions-bundle": "^1.4",
         "symfony/asset": "5.0.*",
@@ -75,7 +77,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": true,
+            "allow-contrib": "true",
             "require": "5.0.*"
         }
     }
