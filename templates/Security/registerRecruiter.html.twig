@@ -15,11 +15,21 @@
 <form class="form-signin" method="post">
 
     <h1 class="h3 mb-3 font-weight-normal">Créer votre compte Recruteur</h1>
+
+    <label for="inputFirstname">Prénom de la personne à contacter</label>
+    <input type="text" name="firstName" id="inputFirstname" class="form-control" placeholder="Prénom" required>
+
+    <label for="inputLastname">Nom de la personne à contacter</label>
+    <input type="text" name="lastName" id="inputLastname" class="form-control" placeholder="Nom" required>
+
+    <label for="inputPhone">Téléphone de contact</label>
+    <input type="number" name="phone" id="inputPhone" class="form-control" placeholder="Téléphone" required>
+
+    <label for="inputCity">Ville où se situe le lieu de travail</label>
+    <input type="text" name="city" id="inputCity" class="form-control" placeholder="Ville" required>
+
     <label for="inputEmail">Email</label>
     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-
-    <label for="inputFirstname">Nom du contact</label>
-    <input type="text" name="firstName" id="inputFirstname" class="form-control" placeholder="Nom de contact" required>
 
     <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>

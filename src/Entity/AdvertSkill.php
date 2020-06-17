@@ -24,13 +24,11 @@ class AdvertSkill
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Advert")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $advert;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Skill")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $skill;
 

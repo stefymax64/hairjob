@@ -7,8 +7,10 @@
     <table class="fa-table">
         <thead>
             <th>ID</th>
+            <th>Prénom</th>
+            <th>Nom</th>
             <th>Email</th>
-            <th>Contact</th>
+            <th>Téléphone</th>
             <th>N° Siret</th>
             <th>Rôles</th>
             <th>Actions</th>
@@ -17,8 +19,10 @@
             {% for user in users %}
                 <tr>
                     <td>{{ user.id }}</td>
-                    <td>{{ user.email }}</td>
                     <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.email }}</td>
                     <td>{{ user.siret }}</td>
                     <td>
                         {% for role in user.roles %}

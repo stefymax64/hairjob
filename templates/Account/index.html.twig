@@ -3,9 +3,16 @@
 {% block title %}Votre profil Candidat {% endblock %}
 
 {% block base_body %}
-    Bonjour <strong>{{ app.user.firstName }}</strong>
+    Bonjour <strong>{{ app.user.firstName }} {{ app.user.lastName }}</strong>
 
-    <p>Voici votre adresse mail : {{ app.user.email }}</p>
+    <section>
+    <ul>
+        <li>Votre N° de téléphone : {{ app.user.phone }}</li>
+        <li>Votre adresse mail : {{ app.user.email }}</li>
+        <li>Votre ville : {{ app.user.city }}</li>
+        <li>Votre N° Siret : {{ app.user.siret }}</li>
+    </ul>
+    </section>
 
     <p>La rubrique "profil" est en cours de réalisation, merci de bien vouloir patienter !</p>
 

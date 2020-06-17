@@ -39,6 +39,10 @@ class AdvertRepository extends ServiceEntityRepository
             ->addSelect('i')
             ->leftJoin('a.categories', 'c')
             ->addSelect('c')
+            ->leftJoin('a.skills', 's')
+            ->addSelect('s')
+            ->leftJoin('a.advert_skills', 'l')
+            ->addSelect('l')
             ->orderBy('a.date', 'DESC')
             ->getQuery();
 
@@ -61,8 +65,9 @@ class AdvertRepository extends ServiceEntityRepository
 
         $query = $queryBuilder->getQuery();
         $results = $query->getResult();
-
         return $results;
+
+        //return $query->getResult();
     }
 
     public function myFind()
@@ -86,6 +91,32 @@ class AdvertRepository extends ServiceEntityRepository
             ->innerJoin('a.categories', 'c')
             ->addSelect('c');
         $qb->where($qb->expr()->in('c.name', $categoryNames));
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAdvertWithSkill(array $skillNames)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb
+            ->innerJoin('a.skills', 's')
+            ->addSelect('s');
+        $qb->where($qb->expr()->in('s.name', $skillNames));
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAdvertWithAdvertSkill(array $advertskillNames)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb
+            ->innerJoin('a.advert_skills', 'l')
+            ->addSelect('l');
+        $qb->where($qb->expr()->in('l.level', $advertskillNames));
 
         return $qb
             ->getQuery()

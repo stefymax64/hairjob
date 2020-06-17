@@ -4,10 +4,10 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -57,13 +57,33 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="integer", length=255, nullable=true)
+     *
      */
     private $avatarUrl;
 
     /**
      * @ORM\Column(type="integer", length=14, nullable=true)
+     * @Groups("main")
      */
     private $siret;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("main")
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @Groups("main")
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=40, nullable=true)
+     * @Groups("main")
+     */
+    private $city;
 
     public function __construct()
     {
@@ -237,6 +257,42 @@ class User implements UserInterface
                 $apitoken->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

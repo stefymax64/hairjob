@@ -18,4 +18,12 @@ class SkillRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Skill::class);
     }
+
+    public function getLikeQueryBuilder($pattern)
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->where('s.name LIKE :pattern')
+            ->setParameter('pattern', $pattern);
+    }
 }

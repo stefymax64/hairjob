@@ -93,7 +93,6 @@ class AdvertController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($advert);
             $em->flush();
-
             $request->getSession()->getFlashBag()->add('notice', 'L\'annonce est enregistrée.');
             return $this->redirectToRoute('advert_view', [
                 'id' => $advert->getId()]);

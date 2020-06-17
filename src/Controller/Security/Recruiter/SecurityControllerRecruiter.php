@@ -23,8 +23,12 @@ class SecurityControllerRecruiter extends SecurityController
         if ($request->isMethod('POST'))
         {
             $user = new User();
-            $user->setEmail($request->request->get('email'));
+
             $user->setFirstName($request->request->get('firstName'));
+            $user->setLastName($request->request->get('lastName'));
+            $user->setPhone($request->request->get('phone'));
+            $user->setCity($request->request->get('city'));
+            $user->setEmail($request->request->get('email'));
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
                 $request->request->get('password')

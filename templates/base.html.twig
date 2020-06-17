@@ -49,22 +49,22 @@
     <input class="menu-btn" type="checkbox" id="menu-btn"/>
     <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
     <ul class="menu">
-        {% if is_granted('ROLE_USER') %}
-            <li>
-                <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
-                <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
-            </li>
-            <li><a href="{{ path('app_account') }}">Profil</a></li>
-            <li><a href="{{ path('app_contact') }}">Contact</a></li>
-            <li><a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a></li>
-
-        {% elseif is_granted('ROLE_RECRUITER') %}
+        {% if is_granted('ROLE_RECRUITER') %}
             <li>
                 <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
                 <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
             </li>
             <li><a href="{{ path('app_account') }}">Profil</a></li>
             <li><a href="{{ path('advert_add') }}">Publier une annonce</a></li>
+            <li><a href="{{ path('app_contact') }}">Contact</a></li>
+            <li><a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a></li>
+
+        {% elseif is_granted('ROLE_USER') %}
+            <li>
+                <p class="welcome">Bienvenue <strong>{{ app.user.firstName }}</strong> !</p>
+                <img class="nav-profile-img rounded-circle" src="{{ app.user.avatarUrl(100) }}" alt="avatar">
+            </li>
+            <li><a href="{{ path('app_account') }}">Profil</a></li>
             <li><a href="{{ path('app_contact') }}">Contact</a></li>
             <li><a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a></li>
         {% else %}

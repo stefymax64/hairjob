@@ -29,9 +29,9 @@ class LoadSkill extends Fixture
         ];
 
         foreach ($names as $name) {
-            $skill = new Skill();
-            $skill->setName($name);
-            $manager->persist($skill);
+            $skills = new Skill();
+            $skills->setName($name);
+            $manager->persist($skills);
         }
         $manager->flush();
     }

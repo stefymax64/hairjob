@@ -83,11 +83,25 @@ class Advert
      */
     private $author;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Skill::class, cascade={"persist"})
+     * @ORM\JoinTable(name="advert_newskill")
+     */
+    private $skills;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=AdvertSkill::class, cascade={"persist"})
+     * @ORM\JoinTable(name="advert_levels")
+     */
+    private $advert_skills;
+
     public function __construct()
     {
         $this->date = new Datetime();
         $this->categories = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->skills = new ArrayCollection();
+        $this->advert_skills = new ArrayCollection();
     }
 
     /**
@@ -278,5 +292,55 @@ class Advert
         return $this;
     }
 
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
 
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills[] = $skill;
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): self
+    {
+        if ($this->skills->contains($skill)) {
+            $this->skills->removeElement($skill);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getAdvertSkills(): Collection
+    {
+        return $this->advert_skills;
+    }
+
+    public function addAdvertSkill(self $advertSkill): self
+    {
+        if (!$this->advert_skills->contains($advertSkill)) {
+            $this->advert_skills[] = $advertSkill;
+        }
+
+        return $this;
+    }
+
+    public function removeAdvertSkill(self $advertSkill): self
+    {
+        if ($this->advert_skills->contains($advertSkill)) {
+            $this->advert_skills->removeElement($advertSkill);
+        }
+
+        return $this;
+    }
 }

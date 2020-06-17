@@ -18,4 +18,12 @@ class AdvertSkillRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, AdvertSkill::class);
     }
+
+    public function getLikeQueryBuilder($pattern)
+    {
+        return $this
+            ->createQueryBuilder('l')
+            ->where('l.level LIKE :pattern')
+            ->setParameter('pattern', $pattern);
+    }
 }

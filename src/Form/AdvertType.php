@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Skill;
 use App\Repository\CategoryRepository;
+Use App\Repository\AdvertSkillRepository;
+use App\Repository\SkillRepository;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -32,6 +35,20 @@ class AdvertType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'query_builder' => function (CategoryRepository $repository) use ($pattern) {
+                    return $repository->getLikeQueryBuilder($pattern);
+                }])
+            ->add('skills', EntityType::class, [
+                'class' => 'App\Entity\Skill',
+                'choice_label' => 'name',
+                'multiple' => true,
+                'query_builder' => function (SkillRepository $repository) use ($pattern) {
+                    return $repository->getLikeQueryBuilder($pattern);
+                }])
+            ->add('advert_skills', EntityType::class, [
+                'class' => 'App\Entity\AdvertSkill',
+                'choice_label' => 'level',
+                'multiple' => true,
+                'query_builder' => function (AdvertSkillRepository $repository) use ($pattern) {
                     return $repository->getLikeQueryBuilder($pattern);
                 }])
             ->add('save', SubmitType::class);
