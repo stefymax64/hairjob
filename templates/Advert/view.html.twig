@@ -29,21 +29,22 @@
     {% endif %}
 
     {% if not advert.skills.empty %}
-        <div>
-            Cette annonce est parue dans les compétences suivantes :
+            <ul>
+                <li>Cette annonce requiert :</li>
+                    <ul>
+                <li>- les compétences suivantes :</li>
             {% for skill in advert.skills %}
                 {{ skill.name }}{% if not loop.last %}, {% endif %}
             {% endfor %}
-        </div>
     {% endif %}
 
     {% if not advert.advertSkills.empty %}
-        <div>
-            Cette annonce est parue dans les niveaux suivantes :
+            <li>- le niveau suivant :</li>
             {% for advert_skill in advert.advertskills %}
                 {{ advert_skill.level }}{% if not loop.last %}, {% endif %}
             {% endfor %}
-        </div>
+        </ul>
+        </ul>
     {% endif %}
 
     {% if listAdvertSkills|length > 0 %}

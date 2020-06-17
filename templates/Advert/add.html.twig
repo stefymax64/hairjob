@@ -7,6 +7,15 @@
 {% block layout_body %}
 
     <h2>Ajouter une annonce</h2>
+    <br>
+    <h3>Instruction concernant l'annonce :</h3>
+    <p>1- Merci de bien vouloir respecter tous les champs </p>
+    <p>2- Veuillez renseigner les coordonnées de la personne à contacter :</p>
+        <ul>
+            <li>Nom du contact</li>
+            <li>N° de téléphone valide</li>
+            <li>Adresse email valide</li>
+        </ul>
 
     {{ include("Advert/_form.html.twig") }}
 
