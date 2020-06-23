@@ -1,9 +1,9 @@
 /*********************MOBILE FIRST***************************/
+/**GLOBAL**/
 * {
     box-sizing: border-box;
     outline: none;
 }
-
 html {
     font-size: 62.5%;
 }
@@ -14,15 +14,13 @@ body {
     color: #5C463D;
     font-size: 1.6rem;
     line-height: 1.8;
-    margin-top: 180px;
+    margin-top: 210px;
 }
-
 a {
     color: #5C463D;
     text-decoration: none;
     transition: all 0.2s ease 0s;
 }
-
 a:hover {
     color: #fffbf9;
     text-decoration: none;
@@ -31,30 +29,45 @@ a:hover {
     border-radius: 5px;
     border: 1px solid #fff;
 }
-
 img {
     max-width: 100%;
 }
 h1 {
     font-size: 3.2rem;
     color: #cd5c5c;
+    text-align: center;
 }
-
 h2 {
     text-transform: uppercase;
     font-size: 1.8rem;
     color: #cd5c5c;
 }
-
 h3 {
     font-size: 1.6rem;
     color: #cd5c5c;
+}
+h4{
+    font-size: 1.4rem;
+    color: #cd5c5c;
+    text-align: center;
+    text-transform: uppercase;
+}
+h5{
+    font-size: 1.2rem;
+    text-align: center;
+}
+h5:hover {
+    color: #fffbf9;
+    text-decoration: none;
+    background-color: #cd5c5c;
+    transition: all 0.2s ease 0s;
+    border-radius: 5px;
+    border: 1px solid #fff;
 }
 ul li {
     list-style: none;
 }
 /**HEADER**/
-
 .header {
     background-color: #fff;
     box-shadow: 10px 10px 10px -10px rgba(92, 70, 61, 1);
@@ -63,41 +76,42 @@ ul li {
     z-index: 3;
     top: 0;
 }
-
-/* Titre logo du site*/
+/* TITLE LOGO WEBSITE */
 .font_bebas {
     font-family: 'Bebas Neue', cursive;
     letter-spacing: 0.2em;
     text-transform: uppercase;
 }
-
 .font_eagle {
     font-family: 'Eagle Lake', cursive;
     letter-spacing: 0.2em;
     line-height: 0;
 }
-
 .font_lobster {
     font-family: 'Lobster Two', cursive;
 }
-
 .logo a:hover {
     color: inherit;
 }
-/*****Body****/
-
+/** MAIN **/
+/*NO MOBIL-FIRST CAROUSEL*/
+.carousel {
+    display: none;
+}
+.h_font_bebas {
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: center;
+}
+.h_title{
+    display: none;
+}
 .flex {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
     flex-wrap: wrap;
     margin-top: 2%;
 }
-/**Pas de carousel en mobile**/
-/*#carouselExampleCaptions {
-    display: none;
-}*/
 .article {
     border: 1px solid rgb(205, 190, 216);
     border-radius: 3%;
@@ -119,9 +133,18 @@ img.imgarticle {
     top: -30px;
     box-shadow: 0 2px 5px 1px #d7d7d7;
 }
-
 img.imgarticle:hover {
     transform: scale(1.2);
+}
+/** LOGIN **/
+.h_font_b {
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: center;
+}
+.login_register{
+    
 }
 .connect a, button{
     border-radius: 5px;
@@ -139,7 +162,7 @@ img.imgarticle:hover {
     border: 1px solid #fff;
 }
 
-/*******Advert********/
+/*** ADVERT ***/
 img.imgadvert {
     max-width: 35%;
     border-radius: 3%;
@@ -147,7 +170,8 @@ img.imgadvert {
     float: left;
     margin-right: 25px;
 }
-/*********FOOTER*********/
+
+/** FOOTER **/
 .footer{
     text-align: center;
 }
@@ -158,19 +182,16 @@ img.imgadvert {
     color: #cd5c5c;
     font-weight: bold;
 }
-
+.p_footer{
+    text-align: center;
+}
 /*******************************************************************************************************************************/
-
 /*********************************************************MEDIA SCREEN**********************************************************/
-
 /*******************************************************************************************************************************/
-
-/*on appel le @media et on lui assigne les valeurs à l'intérieur*/
-
 /* VERSION RESPONSIVE */
-
-/*VERSION TABLET min-width: 768px max-width: 1025px; largeur du site Tablet 48em - 64em*/
+/* VERSION TABLET min-width: 768px max-width: 1025px; width Tablet 48em - 64em*/
 @media screen and (min-width:48em) {
+    /** MAIN **/
     .flex {
         display: flex;
         flex-direction: row;
@@ -181,6 +202,7 @@ img.imgadvert {
         width: 40%;
         margin: 2%;
     }
+    /** FOOTER **/
     .info{
         display: flex;
         justify-content: space-around;
@@ -193,20 +215,61 @@ img.imgadvert {
         padding-bottom: 5px;
     }
 }
-/* VERSION DESKTOP min-width: 1025px largeur du site Desktop > 64em*/
+/* VERSION DESKTOP min-width: 1025px width Desktop > 64em*/
 
 @media screen and (min-width:64em) {
-    /**Header**/
-    /**Main**/
+    /** MAIN **/
     .container {
         max-width: 80%;
         margin: 0 auto;
+    }
+    /* TITLE PARALLAX */
+    .h_font_bebas {
+        display: none;
+    }
+    .h_title{
+        display: block;
+    }
+    .h_title{
+        margin: 0;
+        padding: 0;
+        position: relative;
+        width: 100%;
+        height: 15vh;
+        overflow: hidden;
+    }
+    .textbox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 15vh;
+        overflow: hidden;
+        background: #cd5c5c;
+        clip-path: polygon(0 0, 55% 0, 45% 100%, 0% 100%);
+    }
+    .h_title h2,
+    .h_title .textbox h2 {
+        position: absolute;
+        top: calc(50% - 35px);
+        width: 100%;
+        text-align: center;
+        font-size: 3.2em;
+        color: #fff;
+    }
+    .h_title h2 {
+        color: #cd5c5c;
+    }
+    .carousel{
+        margin-top: 5rem;
+        display: block;
     }
     .flex {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
     }
+    /** ADVERT **/
     img.imgadvert {
         max-width: 25%;
         border-radius: 3%;
@@ -214,6 +277,7 @@ img.imgadvert {
         float: left;
         margin-right: 25px;
     }
+    /** FOOTER **/
     .info{
         display: flex;
         justify-content: space-around;
