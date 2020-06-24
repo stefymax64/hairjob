@@ -9,11 +9,8 @@
 
 {% block base_body %}
     {% for message in app.flashes('message') %}
-        <div class="alert alert-success" role="alert">
-            {{ message }}
-        </div>
+        <div class="alert alert-success" role="alert">{{ message }}</div>
     {% endfor %}
-    <h1>Nous contacter</h1>
+    <h2 class="h_font_b">Nous contacter</h1>
     {{ form(contactForm) }}
-
 {% endblock %}

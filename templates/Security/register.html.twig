@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 {% endblock %}
 {% block base_body %}
-    <div class="container">
-        <div id="content">
-            <section class="login_register">
-                <h2 class="h_font_b">Connectez-vous ou créer votre compte candidat</h2>
+    <h2 class="h_font_b">Connectez-vous ou créer votre compte candidat</h2>
+        <section class="register_login">
+            <article class="form-signin">
                 <p>Si vous souhaitez consulter toutes les offres d'emplois disponbles dans votre région, créer votre espace candidat ou connectez-vous :</p>
-                <a class="connect" href="{{ path('app_login') }}">Connexion</a>
-            </section>
-            <form class="form-signin" method="post">
-                <h4 class="h3 mb-3 font-weight-normal">Créer votre compte candidat</h4>
+                <div class="connect"><a href="{{ path('app_login') }} class="connect"">Connexion</a></div>
+            </article>
+            <article>
+                <form class="form-signin" method="post">
+                    <h4 class="h3 mb-3 font-weight-normal">Créer votre compte candidat</h4>
                     <label for="inputFirstname">Prénom</label>
                     <input type="text" name="firstName" id="inputFirstname" class="form-control" placeholder="Prénom" required>
 
@@ -40,7 +40,7 @@
                         </label>
                     </div>
                     <button class="connect" type="submit">Enregistrer</button>
-            </form>
-        </div>
-    </div>
+                </form>
+            </article>
+        </section>
 {% endblock %}

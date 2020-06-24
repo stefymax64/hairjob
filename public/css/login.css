@@ -1,9 +1,12 @@
 .form-signin {
     width: 100%;
-    max-width: 330px;
     padding: 15px;
     margin: auto;
     margin-top: 50px;
+    margin-left: 5%;
+    border: 1px solid rgb(205, 190, 216);
+    border-radius: 3%;
+    box-shadow: 0 0 5px #d7d7d7;
 }
 
 .form-signin .checkbox {

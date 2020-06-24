@@ -7,42 +7,33 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 {% endblock %}
 {% block base_body %}
+    <h2 class="h_font_b">Connectez-vous</h2>
+    <section class="register_login">
+        <form class="form-signin" method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-<form class="form-signin" method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+            {% if app.user %}
+                <div class="mb-3">
+                    Vous êtes connectés :  {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connectés :  {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+                <label for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
 
-    <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
 
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" id="remember_me" name="_remember_me"> Se souvenir de moi
-            </label>
-        </div>
-
-    {#
-            If you want to control the URL the user
-            is redirected to on success (more details below)
-            <input type="hidden" name="_target_path" value="/account" />
-        #}
-
-    <button class="connect" type="submit">
-        Connexion
-    </button>
-</form>
-
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" id="remember_me" name="_remember_me"> Se souvenir de moi
+                    </label>
+                </div>
+                <button class="connect" type="submit">Connexion</button>
+        </form>
+    </section>
 {% endblock %}

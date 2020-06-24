@@ -79,9 +79,9 @@
         </nav>
     </header>
     <main>
-        {% block base_body %}
         <div class="container">
             <div id="content">
+            {% block base_body %}
                 <h2 class="h_font_bebas">Les offres d'emploi de la coiffure</h2>
                 <section class="h_title">
                     <h2 class="layer">Les offres d'emploi de la coiffure</h2>
@@ -261,9 +261,9 @@
                         </li>
                     </ul>
                 </section>
+            {% endblock %}
             </div>
         </div>
-        {% endblock %}
     </main>
     <footer>
         <hr>
