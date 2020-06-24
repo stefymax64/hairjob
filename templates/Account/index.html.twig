@@ -1,20 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Votre profil Candidat {% endblock %}
+{% block title %}Votre profil{% endblock %}
 
 {% block base_body %}
-    Bonjour <strong>{{ app.user.firstName }} {{ app.user.lastName }}</strong>
-
-    <section>
-    <ul>
-        <li>Votre N° de téléphone : {{ app.user.phone }}</li>
-        <li>Votre adresse mail : {{ app.user.email }}</li>
-        <li>Votre ville : {{ app.user.city }}</li>
-        <li>Votre N° Siret : {{ app.user.siret }}</li>
-    </ul>
-    </section>
-
-    <p>La rubrique "profil" est en cours de réalisation, merci de bien vouloir patienter !</p>
-
-
+    <h2>Bonjour <strong>{{ app.user.firstName }} {{ app.user.lastName }}</strong></h2>
+        <section class="profil">
+            <ul>
+                <li><strong>Votre N° de téléphone :</strong> {{ app.user.phone }}</li>
+                <li><strong>Votre adresse mail :</strong> {{ app.user.email }}</li>
+                <li><strong>Votre ville :</strong> {{ app.user.city }}</li>
+                <li><strong>Votre N° Siret :</strong> {{ app.user.siret }}</li>
+            </ul>
+        </section>
 {% endblock %}

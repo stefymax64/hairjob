@@ -5,20 +5,8 @@
 {% endblock %}
 
 {% block layout_body %}
-
-    <h2>Modifier une annonce</h2>
-
-    {{ include("Advert/_form.html.twig") }}
-
-    <p>
-        Vous éditez une annonce déjà existante, merci de ne pas changer
-        l'esprit général de l'annonce déjà publiée.
-    </p>
-    <p>
-        <a href="{{ path('advert_view', {'id': advert.id }) }}" class="">
-            <i class=""></i>
-            Retour à l'annonce
-        </a>
-    </p>
-
+    <h2 class="h_font_b">Modifier une annonce</h2>
+        {{ include("Advert/_form.html.twig") }}
+        <small><strong>Attention :</strong>vous éditez une annonce déjà existante, merci de ne pas changer l'esprit général de l'annonce déjà publiée.</small>
+        <p><a href="{{ path('advert_view', {'id': advert.id }) }}">Retour à l'annonce</a></p>
 {% endblock %}

@@ -5,70 +5,68 @@
 {% endblock %}
 
 {% block layout_body %}
-
-    <div>
-        {% if advert.image is not null %}
-            <img class="imgadvert" src="{{ asset(advert.image.webPath) }}" alt="{{ advert.image.alt }}"/>
-        {% endif %}
-    </div>
-
-    <h2>{{ advert.title }}</h2>
-    <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
-
-    <div>
-        {{ advert.content|raw }}
-    </div>
-    <br>
-    {% if not advert.categories.empty %}
-        <div>
-            Cette annonce est parue dans les catégories suivantes :
-            {% for category in advert.categories %}
-                {{ category.name }}{% if not loop.last %}, {% endif %}
-            {% endfor %}
-        </div>
-    {% endif %}
-
-    {% if not advert.skills.empty %}
-            <ul>
-                <li>Cette annonce requiert :</li>
-                    <ul>
-                <li>- les compétences suivantes :</li>
-            {% for skill in advert.skills %}
-                {{ skill.name }}{% if not loop.last %}, {% endif %}
-            {% endfor %}
-    {% endif %}
-
-    {% if not advert.advertSkills.empty %}
-            <li>- le niveau suivant :</li>
-            {% for advert_skill in advert.advertskills %}
-                {{ advert_skill.level }}{% if not loop.last %}, {% endif %}
-            {% endfor %}
-        </ul>
-        </ul>
-    {% endif %}
-
-    {% if listAdvertSkills|length > 0 %}
-        <div>
-            Cette annonce requiert les compétences suivantes :
-            <ul>
-                {% for advertSkill in listAdvertSkills %}
-                    <li>{{ advertSkill.skill.name }} : niveau {{ advertSkill.level }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-<br>
-    <section class="info">
-        <article>
-            <i class=""></i>
-            <a href="{{ path('advert_index') }}">Retour à la liste</a>
+<section>
+    <h2 class="h_font">{{ advert.title }}</h2>
+        <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+        <article class="viewimg">
+            {% if advert.image is not null %}
+                <img class="imgadvert" src="{{ asset(advert.image.webPath) }}" alt="{{ advert.image.alt }}"/>
+            {% endif %}
         </article>
-            <i class=""></i>
-            <a href="{{ path('advert_edit', {'id': advert.id}) }}">Modifier l'annonce</a>
-        <article>
-            <i class=""></i>
-            <a href="{{ path('advert_delete', {'id': advert.id}) }}">Supprimer l'annonce</a>
+        <article class="advert_v">
+            {{ advert.content|raw }}
         </article>
-    </section>
+        <article class="viewcat">
+            {% if not advert.categories.empty %}
+                    <p>Cette annonce est parue dans les catégories suivantes :</p>
+                    {% for category in advert.categories %}
+                        {{ category.name }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+            {% endif %}
+        </article>
+        <details>
+            {% if not advert.skills.empty %}
+                    <summary>Cette annonce requiert :</summary>
+                        <ul>
+                            <li>les compétences suivantes :
+                                {% for skill in advert.skills %}
+                                    <i>{{ skill.name }}{% if not loop.last %}, {% endif %}</i>
+                                {% endfor %}
+                            </li>
+            {% endif %}
+            {% if not advert.advertSkills.empty %}
+                             <li>le niveau suivant :
+                                {% for advert_skill in advert.advertskills %}
+                                    <i>{{ advert_skill.level }}{% if not loop.last %}, {% endif %}</i>
+                                {% endfor %}
+                             </li>
+                        </ul>
 
+            {% endif %}
+        </details>
+        <article>
+            {% if listAdvertSkills|length > 0 %}
+                <article>
+                    <p>Cette annonce requiert les compétences suivantes :</p>
+                        <ul>
+                            {% for advertSkill in listAdvertSkills %}
+                                <li>{{ advertSkill.skill.name }} : niveau {{ advertSkill.level }}</li>
+                            {% endfor %}
+                        </ul>
+                </article>
+            {% endif %}
+        </article>
+</section>
+<section class="info">
+    <article>
+        <i class=""></i>
+        <a href="{{ path('advert_index') }}">Retour à la liste</a>
+    </article>
+        <i class=""></i>
+        <a href="{{ path('advert_edit', {'id': advert.id}) }}">Modifier l'annonce</a>
+    <article>
+        <i class=""></i>
+        <a href="{{ path('advert_delete', {'id': advert.id}) }}">Supprimer l'annonce</a>
+    </article>
+</section>
 {% endblock %}

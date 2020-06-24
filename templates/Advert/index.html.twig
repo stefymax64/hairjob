@@ -5,31 +5,27 @@
 {% endblock %}
 
 {% block layout_body %}
-
-    <h2>Liste des annonces</h2>
-
-    {% for message in app.session.flashBag.get('info') %}
-        <div>Message flash : {{ message }}</div>
-    {% endfor %}
-    <ul>
-        {% for advert in listAdverts %}
-            <li>
-                <a href="{{ path('advert_view', {'id': advert.id}) }}"> {{ advert.title }}</a>
-                par {{ advert.author }},
-                le {{ advert.date|date('d/m/Y') }}
-            </li>
-        {% else %}
-            <li>Pas (encore !) d'annonces</li>
+    <h2 class="h_font_b">Liste des annonces</h2>
+        {% for message in app.session.flashBag.get('info') %}
+            <div>Message flash : {{ message }}</div>
         {% endfor %}
-    </ul>
-
-    <ul>
-        {% for p in range(1, nbPages) %}
-            <li>
-                {% if p == page %}{% endif %}
-                <a href="{{ path('advert_index', {'page':p}) }}">{{ p }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-
+        <ul class="profil">
+            {% for advert in listAdverts %}
+                <li>
+                    <a href="{{ path('advert_view', {'id': advert.id}) }}"> {{ advert.title }}</a>
+                    par : {{ advert.author }},
+                    le : {{ advert.date|date('d/m/Y') }}
+                </li>
+            {% else %}
+                <li>Pas (encore !) d'annonces</li>
+            {% endfor %}
+        </ul>
+        <ul>
+            {% for p in range(1, nbPages) %}
+                <li>
+                    {% if p == page %}{% endif %}
+                    <a href="{{ path('advert_index', {'page':p}) }}">{{ p }}</a>
+                </li>
+            {% endfor %}
+        </ul>
 {% endblock %}

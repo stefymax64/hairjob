@@ -3,7 +3,6 @@
     padding: 15px;
     margin: auto;
     margin-top: 50px;
-    margin-left: 5%;
     border: 1px solid rgb(205, 190, 216);
     border-radius: 3%;
     box-shadow: 0 0 5px #d7d7d7;
@@ -35,4 +34,10 @@
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+/* VERSION DESKTOP min-width: 1025px width Desktop > 64em*/
+@media screen and (min-width: 64em) {
+    .form-signin {
+        margin-left: 5%;
+    }
 }
