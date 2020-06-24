@@ -22,6 +22,7 @@ class AdvertController extends AbstractController
 {
     /**
      * @Route("/advert/{page}", name="advert_index", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @IsGranted("ROLE_USER")
      * @param $page
      * @return Response
      */

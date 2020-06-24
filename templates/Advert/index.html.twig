@@ -20,12 +20,10 @@
                 <li>Pas (encore !) d'annonces</li>
             {% endfor %}
         </ul>
-        <ul>
+        <small>
             {% for p in range(1, nbPages) %}
-                <li>
-                    {% if p == page %}{% endif %}
-                    <a href="{{ path('advert_index', {'page':p}) }}">{{ p }}</a>
-                </li>
+                {% if p == page %}{% endif %}
+                <a href="{{ path('advert_index', {'page':p}) }}">{{ p }}</a>
             {% endfor %}
-        </ul>
+        </small>
 {% endblock %}
