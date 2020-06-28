@@ -6,6 +6,12 @@
     <meta name="description" content="Découvrez les offres d'emploi de la coiffure">
     <meta name="title" content="Hair'Job">
 
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+
     <title>{% block title %}Bienvenue sur Hair'Job !{% endblock %}</title>
 
     {% block stylesheets %}
@@ -92,6 +98,7 @@
 
                 <!--Carousel-->
                 <section class="carousel">
+                <h3 class="carousel_h">Les dernières collections : Printemps-Été 2020</h3>
                     <div id="demo" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
                         <ul class="carousel-indicators">
@@ -245,7 +252,7 @@
                     </div>
                 </section>
                 <section class="flex">
-                    <h4>L'actualité de la coiffure</h4>
+                    <h4 class="flex_h">L'actualité de la coiffure</h4>
                     <ul class="flex">
                         <li class="article">
                             <a href="https://www.legifrance.gouv.fr/affichIDCC.do?idConvention=KALICONT000018563755" target="_blank">
@@ -266,7 +273,6 @@
         </div>
     </main>
     <footer>
-        <hr>
         <nav class="footer">
                 <ul>
                     <li><a href="{{ path('advert_index') }}">Consulter les dernières annonces</a></li>
@@ -300,13 +306,12 @@
                 </section>
             <hr>
             <small>Made with <i class="fa fa-heart"></i> by <span>Clémentine </span></small>
+            <p>
+                <a href="https://jigsaw.w3.org/css-validator/check/referer">
+                    <img style="border:0;width:88px;height:31px" src="https://jigsaw.w3.org/css-validator/images/vcss-blue" alt="CSS Valide !" />
+                </a>
+            </p>
         </nav>
-        <!-- VALIDATOR W3C -->
-        <p class="p_footer">
-            <a href="http://jigsaw.w3.org/css-validator/check/referer">
-                <img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="CSS Valide !" />
-            </a>
-        </p>
     </footer>
 
 {% block javascripts %}

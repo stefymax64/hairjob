@@ -12,6 +12,6 @@
     {% for message in app.flashes('message') %}
         <div class="alert alert-success" role="alert">{{ message }}</div>
     {% endfor %}
-    <h2 class="h_font_b">Nous contacter</h1>
+    <h2 class="h_font_b">Nous contacter</h2>
     {{ form(contactForm) }}
 {% endblock %}
