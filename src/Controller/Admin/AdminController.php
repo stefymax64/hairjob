@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin", name="admin_")
- * @IsGranted("ROLE_ADMIN")
+ * @IsGranted("ROLE_ADMIN", message="Espace reservé à l'administrateur du site !")
  */
 class AdminController extends AbstractController
 {

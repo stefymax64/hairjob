@@ -10,6 +10,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -37,13 +38,11 @@ class AdvertType extends AbstractType
                 'query_builder' => function (CategoryRepository $repository) use ($pattern) {
                     return $repository->getLikeQueryBuilder($pattern);
                 }])
-            ->add('skills', EntityType::class, [
-                'class' => 'App\Entity\Skill',
-                'choice_label' => 'name',
-                'multiple' => true,
-                'query_builder' => function (SkillRepository $repository) use ($pattern) {
-                    return $repository->getLikeQueryBuilder($pattern);
-                }])
+            ->add('skills', CollectionType::class, [
+                'entry_type' => SkillType::class,
+                'allow_add' => true,
+                'allow_delete' => true
+            ])
             ->add('advert_skills', EntityType::class, [
                 'class' => 'App\Entity\AdvertSkill',
                 'choice_label' => 'level',

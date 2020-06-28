@@ -36,6 +36,7 @@
 
             {# ADVERT SKILL #}
             {{ form_row(form.skills, {'label': 'Compétence'}) }}
+            <a href="#" id="add_competence" class="btn btn-default">Ajouter une compétence</a>
 
             {# ADVERT LEVEL #}
             {{ form_row(form.advert_skills, {'label': 'Niveau'}) }}
@@ -51,35 +52,58 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        let $container = $('div#advert_categories');
+        // Récupération de la balise <div> contenant l'attribut « data-prototype »
+        let $container = $('div#advert_skills');
+
+        // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
         let index = $container.find(':input').length;
-        $('#add_category').click(function (e) {
-            addCategory($container);
-            e.preventDefault();
+
+        // On ajoute un nouveau champ à chaque clic sur le lien d'ajout
+        $('#add_skill').click(function (e) {
+            addSkill($container);
+            e.preventDefault();// évite qu'un # apparaisse dans l'URL
             return false;
         });
+
+        // On ajoute un premier champ automatique (s'il existe pas déjà, pour une nouvelle annonce par ex)
         if (index == 0) {
-            addCategory($container);
+            addskill($container);
         } else {
+        // S'il existe déjà des compétences, on ajoute un lien de suppression pour chacune d'entre elles
             $container.children('div').each(function () {
                 addDeleteLink($(this));
             });
         }
-        function addCategory($container) {
+
+        // La fonction qui ajoute un formulaire SkillType
+        function addSkill($container) {
+            // Dans le contenu de l'attribut « data-prototype », on remplace :
+            // - le texte "__name__label__" qu'il contient par le label du champ
+            // - le texte "__name__" qu'il contient par le numéro du champ
             let template = $container.attr('data-prototype')
-                .replace(/__name__label__/g, 'Catégorie n°' + (index + 1))
+                .replace(/__name__label__/g, 'Compétence n°' + (index + 1))
                 .replace(/__name__/g, index);
+
+            // On crée un objet jquery qui contient ce template
             let $prototype = $(template);
+            // On ajoute au prototype un lien pour pouvoir supprimer la compétence
             addDeleteLink($prototype);
+            // On ajoute le prototype modifié à la fin de la balise <div>
             $container.append($prototype);
+            //On incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
             index++;
         }
+
+        // La fonction qui ajoute un lien de suppression d'une compétence
         function addDeleteLink($prototype) {
+            // Création du lien
             let $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+            // Ajout du lien
             $prototype.append($deleteLink);
+            // Ajout du listener sur le clic du lien pour supprimer la compétence
             $deleteLink.click(function (e) {
                 $prototype.remove();
-                e.preventDefault();
+                e.preventDefault();// évite qu'un # apparaisse dans l'URL
                 return false;
             });
         }

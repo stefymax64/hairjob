@@ -45,7 +45,7 @@ class AdvertController extends AbstractController
             throw $this->createNotFoundException('Page "' . $page . '" inexistante.');
         }
 
-        return $this->render('Advert/index.html.twig', [
+        return $this->render('advert/index.html.twig', [
             'listAdverts' => $listAdverts,
             'nbPages' => $nbPages,
             'page' => $page]);
@@ -73,7 +73,7 @@ class AdvertController extends AbstractController
             ->findBy([
                 'advert' => $advert]);
 
-        return $this->render('Advert/view.html.twig', [
+        return $this->render('advert/view.html.twig', [
             'advert' => $advert,
             'listApplications' => $listApplications,
             'listAdvertSkills' => $listAdvertSkills]);
@@ -99,13 +99,13 @@ class AdvertController extends AbstractController
                 'id' => $advert->getId()]);
         }
 
-        return $this->render('Advert/add.html.twig', [
+        return $this->render('advert/add.html.twig', [
             'form' => $form->createView()]);
     }
 
     /**
      * @Route("/advert/edit/{id}", name="advert_edit", requirements={"id" = "\d+"})
-     * @IsGranted("ROLE_ADMIN", message="Espace reservé aux employeurs identifiés !")
+     * @IsGranted("ROLE_ADMIN", message="Espace reservé à l'administrateur du site !")
      * @param Request $request
      * @param $id
      * @return RedirectResponse|Response
@@ -128,14 +128,14 @@ class AdvertController extends AbstractController
                 'id' => $advert->getId()]);
         }
 
-        return $this->render('Advert/edit.html.twig', [
+        return $this->render('advert/edit.html.twig', [
             'advert' => $advert,
             'form' => $form->createView()]);
     }
 
     /**
      * @Route("/advert/delete/{id}", name="advert_delete", requirements={"id" = "\d+"})
-     * @IsGranted("ROLE_ADMIN", message="Espace reservé aux employeurs identifiés !")
+     * @IsGranted("ROLE_ADMIN", message="Espace reservé à l'administrateur du site !")
      * @param Request $request
      * @param $id
      * @return RedirectResponse|Response
@@ -158,7 +158,7 @@ class AdvertController extends AbstractController
 
             return $this->redirectToRoute('advert_index');
         }
-        return $this->render('Advert/delete.html.twig', [
+        return $this->render('advert/delete.html.twig', [
             'advert' => $advert,
             'form' => $form->createView()]);
     }
@@ -173,7 +173,7 @@ class AdvertController extends AbstractController
             $limit,
             0
         );
-        return $this->render('Advert/_menu.html.twig', [
+        return $this->render('advert/_menu.html.twig', [
             'listAdverts' => $listAdverts]);
     }
 
