@@ -105,7 +105,7 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/advert/edit/{id}", name="advert_edit", requirements={"id" = "\d+"})
-     * @IsGranted("ROLE_RECRUITER", message="Espace reservé aux employeurs identifiés !")
+     * @IsGranted("ROLE_ADMIN", message="Espace reservé aux employeurs identifiés !")
      * @param Request $request
      * @param $id
      * @return RedirectResponse|Response
@@ -135,7 +135,7 @@ class AdvertController extends AbstractController
 
     /**
      * @Route("/advert/delete/{id}", name="advert_delete", requirements={"id" = "\d+"})
-     * @IsGranted("ROLE_RECRUITER", message="Espace reservé aux employeurs identifiés !")
+     * @IsGranted("ROLE_ADMIN", message="Espace reservé aux employeurs identifiés !")
      * @param Request $request
      * @param $id
      * @return RedirectResponse|Response

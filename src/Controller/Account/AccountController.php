@@ -23,7 +23,7 @@ class AccountController extends BaseController
     }
 
     /**
-     * @Route("/Account", name="app_account")
+     * @Route("/account", name="app_account")
      * @param LoggerInterface $logger
      * @return Response
      */
@@ -31,7 +31,7 @@ class AccountController extends BaseController
     {
         $logger->debug('Checking account page for '.$this->getUser()->getEmail());
 
-        return $this->render('Account/index.html.twig', [
+        return $this->render('account/index.html.twig', [
             'controller_name' => 'AccountController',
         ]);
     }

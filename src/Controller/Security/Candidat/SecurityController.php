@@ -74,6 +74,6 @@ class SecurityController extends AbstractController
             );
         }
 
-        return $this->render('Security/register.html.twig');
+        return $this->render('security/register.html.twig');
     }
 }

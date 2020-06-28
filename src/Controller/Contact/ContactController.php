@@ -28,7 +28,7 @@ class ContactController extends AbstractController
 
             $message = (new \Swift_Message('Nouveau contact'))
                 ->setFrom($contact['email'])
-                ->setTo('monadresse@email.fr')
+                ->setTo('admin@clementinecellier.me')
                 ->setBody(
                     $this->renderView(
                     'emails/contact.html.twig', compact('contact')
@@ -41,7 +41,7 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('index');
         }
 
-        return $this->render('Contact/index.html.twig', [
+        return $this->render('contact/index.html.twig', [
             'contactForm' => $form->createView()
         ]);
     }

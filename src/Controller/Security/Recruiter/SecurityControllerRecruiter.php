@@ -47,6 +47,6 @@ class SecurityControllerRecruiter extends SecurityController
             );
         }
 
-        return $this->render('Security/registerRecruiter.html.twig');
+        return $this->render('security/register_recruiter.html.twig');
     }
 }

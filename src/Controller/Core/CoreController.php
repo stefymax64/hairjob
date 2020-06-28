@@ -13,7 +13,7 @@ class CoreController extends AbstractController
      */
     public function index()
     {
-        return $this->render('Core\index.html.twig', [
+        return $this->render('core\index.html.twig', [
             'title' => 'Présentation du site',
             'subtitle' => 'Bienvenue'
     ]);
@@ -24,7 +24,7 @@ class CoreController extends AbstractController
      */
     public function legalNotice()
     {
-        return $this->render('Core\legalnotice.html.twig');
+        return $this->render('core\legalnotice.html.twig');
     }
 
     /**
@@ -32,7 +32,7 @@ class CoreController extends AbstractController
      */
     public function rgpd()
     {
-        return $this->render('Core/rgpd.html.twig');
+        return $this->render('core/rgpd.html.twig');
     }
 
     /**
@@ -40,6 +40,6 @@ class CoreController extends AbstractController
      */
     public function cookies()
     {
-        return $this->render('Core/cookies.html.twig');
+        return $this->render('core/cookies.html.twig');
     }
 }
