@@ -36,7 +36,7 @@
 
             {# ADVERT SKILL #}
             {{ form_row(form.skills, {'label': 'Compétence'}) }}
-            <a href="#" id="add_competence" class="btn btn-default">Ajouter une compétence</a>
+            <a href="#" id="add_skill" class="btn btn-default">Ajouter une compétence</a>
 
             {# ADVERT LEVEL #}
             {{ form_row(form.advert_skills, {'label': 'Niveau'}) }}
@@ -67,7 +67,7 @@
 
         // On ajoute un premier champ automatique (s'il existe pas déjà, pour une nouvelle annonce par ex)
         if (index == 0) {
-            addskill($container);
+            addSkill($container);
         } else {
         // S'il existe déjà des compétences, on ajoute un lien de suppression pour chacune d'entre elles
             $container.children('div').each(function () {
