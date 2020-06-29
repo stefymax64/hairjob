@@ -77,8 +77,8 @@
                         <li><a href="{{ path('app_contact') }}">Contact</a></li>
                         <li><a class="btn-log" href="{{ path('app_logout') }}"><i class="fas fa-times"></i> Se déconnecter</a></li>
                     {% else %}
-                        <li><a href="{{ path('app_registrer') }}">Espace Candicats</a></li>
-                        <li><a href="{{ path('app_registrer_recruiter') }}">Espace Recruteurs</a></li>
+                        <li><a href="{{ path('app_registrer') }}">Espace Candidat</a></li>
+                        <li><a href="{{ path('app_registrer_recruiter') }}">Espace Recruteur</a></li>
                         <li><a href="{{ path('app_contact') }}">Contact</a></li>
                     {% endif %}
                 </ul>
@@ -276,7 +276,7 @@
         <nav class="footer">
                 <ul>
                     <li><a href="{{ path('advert_index') }}">Consulter les dernières annonces</a></li>
-                    <li>Pour consulter toutes les offres d'emplois, <i class="fas fa-user-lock"></i>
+                    <li>Pour consulter toutes les offres d'emploi, <i class="fas fa-user-lock"></i>
                         <a href="{{ path('app_login') }}"> connectez-vous !</a>
                     </li>
                 </ul>
