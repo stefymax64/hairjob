@@ -213,7 +213,7 @@ class User implements UserInterface
 
     public function getAvatarUrl(string $size = null): string
     {
-        $url = 'https://robohash.org/'.$this->getEmail();
+        $url = 'https://robohash.org/set_set4/'.$this->getEmail();
         if ($size)
             $url .= sprintf('?size=%dx%d', $size, $size);
         return $url;

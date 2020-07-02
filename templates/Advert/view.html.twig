@@ -60,14 +60,16 @@
 </section>
 <section class="info">
     <article>
-        <i class=""></i>
+        <i class="fas fa-undo"></i>
         <a href="{{ path('advert_index') }}">Retour à la liste</a>
     </article>
-        <i class=""></i>
-        <a href="{{ path('advert_edit', {'id': advert.id}) }}">Modifier l'annonce</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <i class="fas fa-edit"></i>
+            <a href="{{ path('advert_edit', {'id': advert.id}) }}">Modifier l'annonce</a>
     <article>
-        <i class=""></i>
+        <i class="fas fa-trash-alt"></i>
         <a href="{{ path('advert_delete', {'id': advert.id}) }}">Supprimer l'annonce</a>
     </article>
+        {% endif %}
 </section>
 {% endblock %}

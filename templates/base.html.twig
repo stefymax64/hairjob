@@ -283,10 +283,12 @@
             {{ render(controller("App\\Controller\\Advert\\AdvertController::menu", {'limit': 3})) }}
             <hr>
                 <section class="info">
+                    {% if is_granted('ROLE_ADMIN') %}
                     <article>
                         <i class="fas fa-lock"></i>
                         <a href="{{ path('admin_users') }}"><h5> Espace Administrateur</h5></a>
                     </article>
+                    {% endif %}
                     <article>
                         <i class="fas fa-coffee"></i>
                         <a href="{{ path('app_contact') }}"><h5> Contact</h5></a>
